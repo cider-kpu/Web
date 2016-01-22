@@ -2,6 +2,14 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
+<%
+	String search = null;
+	if(request.getParameter("search") == null){
+		
+	}
+%>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -48,11 +56,26 @@
 							<%
 								String st = (String)session.getAttribute("ID");
 								if(st == null) out.print("WTF");
-								
-								int a = 8;
-								out.print(((a/5)+1)+", "+a%3);
+
 							%>
                     </div>
+                        <div align="center">
+                      	<%
+                      		if(search == null || search.equals("") == true){
+                      			%>
+                      		<form action="../pages/blank.jsp" method="post">
+                      			<input type="text" name="search" id="search"> <input type="submit" value="검색">
+                     	 	</form>
+                      			<%
+                      		}else{
+                      			%>
+                      		<form action="../pages/blank.jsp" method="post">
+                      			<input type="text" name="search" id="search" value="<%=search%>"> <input type="submit" value="검색">
+                     	 	</form>
+                      			<%
+                      		}
+                      	%>
+						</div>
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->

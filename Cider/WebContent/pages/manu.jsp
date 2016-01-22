@@ -91,13 +91,13 @@
                             <a href="..\pages\index.jsp"><i class="fa fa-home fa-fw"></i> 메인</a>
                         </li>                    
                         <li>
-                            <a href="#"><i class="fa fa-th-list fa-fw"></i> 공개 게시판<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-th-list fa-fw"></i> 게시판<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
 								<%
 									
 										%>
 											<li>
-												<a href="..\pages\vboard.jsp?bcode=1"></i> 게시판</a>
+												<a href="..\pages\vboard.jsp?bcode=1"></i> 공개 게시판</a>
 											</li>
 										<%
 									
@@ -105,7 +105,46 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-group fa-fw"></i> 팀 메뉴</a>
+                            <a href="#"><i class="fa fa-group fa-fw"></i> 팀 메뉴<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                            <%
+                            if( session.getAttribute("GCODE") != null && session.getAttribute("GLEAD") != null){
+                        		%>
+                        		<li>
+                        			<a href="#"> 팀 관리</a>
+                        		</li>
+                        		<li>
+                        			<a href="#"> 맴버 관리<span class="fa arrow"></span></a>
+                        			<ul class="nav nav-third-level">
+                        			<li>
+                        				<a href="#"> 가입 신청 목록</a>
+                        			</li>
+                        			<li>
+                        				<a href="#"> 회뭔 록록</a>
+                        			</li>
+                        			</ul>
+                        		</li>
+                       `	</ul>
+                        		<%
+                        	}else if( session.getAttribute("ID") == null){
+                            		%>
+                            	<li>
+                            		<a href="../pages/login.html">로그인</a>
+                            	</li>
+                            </ul>
+                            		<%
+                            	}else{
+                            		%>
+                            	<li>
+                            		<a href="#"> 팀 가입하기</a>
+                            	</li>
+                            	<li>
+                            		<a href="#"> 팀 만들기</a>
+                            	</li>
+                            </ul>
+                            		<%
+                            	}
+                            %>
                         </li>
                         <li>
                             <a href="..\pages\forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>

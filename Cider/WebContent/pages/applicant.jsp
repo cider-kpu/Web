@@ -5,6 +5,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <%
+
+	if( session.getAttribute("GLEAD") == null || (((String)session.getAttribute("ID")).equals("") == true || session.getAttribute("ID") == null) ){
+		%>
+		<script>
+		alert('잘못된 접근입니다.');
+		location.href="..\\pages\\index.html";
+		</script>
+		<%
+	}
+
 	int id = Integer.parseInt(request.getParameter("bcode"));	
 	
 	Statement stmt;
@@ -15,6 +25,7 @@
 	ResultSet rs2;
 	ResultSet rs3;
 	
+	
 	Connection conn=null;
 
 	Class.forName("com.mysql.jdbc.Driver");
@@ -24,14 +35,6 @@
 	stmt2 = conn.createStatement();
 	stmt3 = conn.createStatement();
 	
-	String search = null;
-	
-	if(request.getParameter("search") == null){
-		rs3 = stmt3.executeQuery("select count(*) from article where board="+id);
-	}else{
-		search = (String)request.getParameter("search");
-		rs3 = stmt3.executeQuery("select count(*) from article where subject like '%"+search+"%' and board="+id);
-	}
 	
 	rs2 = stmt2.executeQuery("select * from board where idx="+id);
 	rs3 = stmt3.executeQuery("select count(*) from article where board="+id);
@@ -57,19 +60,10 @@
 		sta_idx = (cpage - 1) * 10;
 		
 		if(cpage == tpage){
-			if(search == null || search.equals("") == true){
-				rs = stmt.executeQuery("select * from article where board="+id+" ORDER BY idx DESC limit "+sta_idx+","+rs3.getInt("count(*)"));
-			}else{
-				rs = stmt.executeQuery("select * from article where subject like '%"+search+"%' and board="+id+" ORDER BY idx DESC limit "+sta_idx+","+rs3.getInt("count(*)"));
-			}
 			
+			rs = stmt.executeQuery("select * from article where board="+id+" ORDER BY idx DESC limit "+sta_idx+","+rs3.getInt("count(*)"));
 		}else{
-			if(search == null || search.equals("") == true){
-				rs = stmt.executeQuery("select * from article where board="+id+" ORDER BY idx DESC limit "+sta_idx+","+(sta_idx+10));
-			}else{
-				rs = stmt.executeQuery("select * from article where subject like '%"+search+"%' and board="+id+" ORDER BY idx DESC limit "+sta_idx+","+(sta_idx+10));
-			}
-			
+			rs = stmt.executeQuery("select * from article where board="+id+" ORDER BY idx DESC limit "+sta_idx+","+(sta_idx+10));
 		}
 	}else{
 		cpage = Integer.parseInt(request.getParameter("pidx"));
@@ -78,19 +72,10 @@
 		sta_idx = (cpage - 1) * 10;
 		
 		if(cpage == tpage){
-			if(search == null || search.equals("") == true){
-				rs = stmt.executeQuery("select * from article where board="+id+" ORDER BY idx DESC limit "+sta_idx+","+(rs3.getInt("count(*)")-sta_idx));
-			}else{
-				rs = stmt.executeQuery("select * from article where subject like '%"+search+"%' and board="+id+" ORDER BY idx DESC limit "+sta_idx+","+(rs3.getInt("count(*)")-sta_idx));
-			}
 			
+			rs = stmt.executeQuery("select * from article where board="+id+" ORDER BY idx DESC limit "+sta_idx+","+(rs3.getInt("count(*)")-sta_idx));
 		}else{
-			if(search == null || search.equals("") == true){
-				rs = stmt.executeQuery("select * from article where board="+id+" ORDER BY idx DESC limit "+sta_idx+","+sta_idx+9);
-			}else{
-				rs = stmt.executeQuery("select * from article where subject like '%"+search+"%' and board="+id+" ORDER BY idx DESC limit "+sta_idx+","+sta_idx+9);
-			}
-			
+			rs = stmt.executeQuery("select * from article where board="+id+" ORDER BY idx DESC limit "+sta_idx+","+sta_idx+9);
 		}
 	}
 	
@@ -138,7 +123,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header"><%=name %></h1>
+                        <h1 class="page-header">가입 신청 목록</h1>
                        	<table class="table table-hover">
                         	<thead>
                                 <tr>
@@ -152,18 +137,13 @@
                             <tbody>
                             <% 
                             	int b = (cpage == tpage) ? rs3.getInt("count(*)")-sta_idx : 10;
-                            	
                             	for(int a=0 ; a < b; a++){
-                            		if(rs.isLast()) break;
-                            		if(rs == null) break;
                             		rs.next();
-                            		
                             		%>
                             			<tr>
                             				<td><%=rs.getInt("idx") %></td>
                             				<td><a href="..\pages\varticle.jsp?idx=<%=rs.getInt("idx") %>&bcode=<%=id %>"><%=rs.getString("subject") %></a></td>
                             				<td><%=rs.getString("writer") %></td>
-                            				<td><%=rs.getString("date") %></td>
                             			</tr>
                             		<%
                             	}
@@ -176,16 +156,9 @@
                         <%
                         
                         if(tblock != 1 && cblock != 1){
-                        	
-                        	if(search == null || search.equals("") == true){
                         	%>
                         	 <a href="..\pages\vboard.jsp?pidx=<%=cpage - (cpage % 5)%>&bcode=<%=id %>"> [&lt;&lt;] </a>
                         	<%
-                        	}else{
-                            	%>
-                          		 <a href="..\pages\vboard.jsp?search=<%=search %>&pidx=<%=cpage - (cpage % 5)%>&bcode=<%=id %>"> [&lt;&lt;] </a>
-                          		<%
-                        	}
                         }
                         	
                         
@@ -199,60 +172,25 @@
                       			<%
                         	}
                         	else{
-                        		
-                        		if(search == null || search.equals("") == true){
                                 %>
                                 <a href="..\pages\vboard.jsp?pidx=<%=tmp+a %>&bcode=<%=id %>">[<%=tmp+a %>]</a>
                               	<%
-                        		}else{
-                                    %>
-                                    <a href="..\pages\vboard.jsp?search=<%=search %>&pidx=<%=tmp+a %>&bcode=<%=id %>">[<%=tmp+a %>]</a>
-                                  	<%
-                        		}
                         	}
                         }
                       	
                         if(tblock != 1 && cblock != tblock && cpage % 5 == 0){
-                        	if(search == null || search.equals("") == true){
                         	%>
                         		<a href="..\pages\vboard.jsp?pidx=<%=cpage + 1%>&bcode=<%=id %>"> [&gt;&gt;] </a>
                         	<%
-                        	}else{
-                            	%>
-                        			<a href="..\pages\vboard.jsp?search=<%=search %>&pidx=<%=cpage + 1%>&bcode=<%=id %>"> [&gt;&gt;] </a>
-                        		<%
-                        	}
                         }else if(tblock != 1 && cblock != tblock){
-                        	if(search == null || search.equals("") == true){
                         	%>
                       	 		<a href="..\pages\vboard.jsp?pidx=<%=cpage + (6 - (cpage % 5))%>&bcode=<%=id %>"> [&gt;&gt;] </a>
                       	 	<%
-                        	}else{
-                            	%>
-                      	 			<a href="..\pages\vboard.jsp?search=<%=search %>&pidx=<%=cpage + (6 - (cpage % 5))%>&bcode=<%=id %>"> [&gt;&gt;] </a>
-                      	 		<%
-                        	}
                         }
                       	%>
                 
                       	</div>
-                      	<div align="center">
-                      	<%
-                      		if(search == null || search.equals("") == true){
-                      			%>
-                      		<form action="../pages/vboard.jsp?bcode=<%=id%>" method="post">
-                      			<input type="text" name="search" id="search"> <input type="submit" value="검색">
-                     	 	</form>
-                      			<%
-                      		}else{
-                      			%>
-                      		<form action="../pages/vboard.jsp?bcode=<%=id%>" method="post">
-                      			<input type="text" name="search" id="search" value="<%=search%>"> <input type="submit" value="검색">
-                     	 	</form>
-                      			<%
-                      		}
-                      	%>
-						</div>
+                      	
                       	
                       	<div align=right><a class="btn btn-default" href="./warticle.jsp?bcode=<%=id %>">글쓰기</a></div>
                     </div>
