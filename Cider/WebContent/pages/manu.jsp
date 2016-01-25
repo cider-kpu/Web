@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    import="java.sql.*" %>
+    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
@@ -108,7 +108,7 @@
                             <a href="#"><i class="fa fa-group fa-fw"></i> 팀 메뉴<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                             <%
-                            if( session.getAttribute("GCODE") != null && session.getAttribute("GLEAD") != null){
+                            if( session.getAttribute("GCODE") != null && session.getAttribute("GPWR") != null){
                         		%>
                         		<li>
                         			<a href="#"> 팀 관리</a>
@@ -120,7 +120,7 @@
                         				<a href="#"> 가입 신청 목록</a>
                         			</li>
                         			<li>
-                        				<a href="#"> 회뭔 록록</a>
+                        				<a href="..\pages\memberlist.jsp"> 회뭔 록록</a>
                         			</li>
                         			</ul>
                         		</li>
@@ -136,7 +136,7 @@
                             	}else{
                             		%>
                             	<li>
-                            		<a href="#"> 팀 가입하기</a>
+                            		<a href="..\pages\teamlist.jsp"> 팀 가입하기</a>
                             	</li>
                             	<li>
                             		<a href="#"> 팀 만들기</a>

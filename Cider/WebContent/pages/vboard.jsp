@@ -3,8 +3,10 @@
     import="java.sql.*"
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+
 <%
+	request.setCharacterEncoding("utf-8");
+
 	int id = Integer.parseInt(request.getParameter("bcode"));	
 	
 	Statement stmt;
@@ -29,23 +31,27 @@
 	if(request.getParameter("search") == null){
 		rs3 = stmt3.executeQuery("select count(*) from article where board="+id);
 	}else{
-		search = (String)request.getParameter("search");
+		if( request.getMethod() == "GET" ){
+			search =(String)request.getParameter("search");
+			search = new String(search .getBytes("8859_1"), "UTF-8");
+		}else
+		search =(String)request.getParameter("search");
 		rs3 = stmt3.executeQuery("select count(*) from article where subject like '%"+search+"%' and board="+id);
 	}
 	
 	rs2 = stmt2.executeQuery("select * from board where idx="+id);
-	rs3 = stmt3.executeQuery("select count(*) from article where board="+id);
+	
 	rs2.next();
 	rs3.next();
 	
 	String name = rs2.getString("name");
 	
 	//페이징 처리
-	int cpage;
-	int cblock;
-	int tpage;
-	int tblock;
-	int sta_idx;
+	int cpage;  // 현재 페이지
+	int cblock; // 현재 블록
+	int tpage;	// 전체 페이지
+	int tblock;	// 전체 블록
+	int sta_idx;// 게시글 시작 인덱스
 	
 	tpage = (rs3.getInt("count(*)") % 10) == 0 ? rs3.getInt("count(*)")/10 : (rs3.getInt("count(*)") / 10) + 1;
 	tblock = tpage % 5 == 0 ? tpage / 5 : (tpage / 5) + 1;
@@ -154,8 +160,9 @@
                             	int b = (cpage == tpage) ? rs3.getInt("count(*)")-sta_idx : 10;
                             	
                             	for(int a=0 ; a < b; a++){
-                            		if(rs.isLast()) break;
-                            		if(rs == null) break;
+                            		if(rs3.getInt("count(*)") == 0 || rs.isLast() == true || rs == null) break;
+                            		else{
+                            		
                             		rs.next();
                             		
                             		%>
@@ -166,6 +173,7 @@
                             				<td><%=rs.getString("date") %></td>
                             			</tr>
                             		<%
+                            		}
                             	}
                             %>
                             </tbody>

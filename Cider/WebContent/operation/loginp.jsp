@@ -33,14 +33,17 @@
 		rs2.next();
 		
 		int gcode = rs2.getInt("gcode");
-		session.setAttribute("GCODE", gcode);
+		String gcodes = Integer.toString(gcode);
+		session.setAttribute("GCODE", gcodes);
 		if(gcode != 0){
 			Statement stmt3 = conn.createStatement();
 			ResultSet rs3 = stmt3.executeQuery("select * from team where idx="+gcode);
 			rs3.next();
 			
 			session.setAttribute("GNAME", rs3.getString("name"));
-			session.setAttribute("GLEAD", rs3.getString("leader"));
+			gcodes = Integer.toString(rs2.getInt("gpwr"));
+			session.setAttribute("GPWR", gcodes);
+			
 		}
 		
 		pageContext.forward("..\\pages\\index.jsp");

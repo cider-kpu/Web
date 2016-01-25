@@ -6,7 +6,7 @@
 <html lang="en">
 <%
 
-	if( session.getAttribute("GLEAD") == null || (((String)session.getAttribute("ID")).equals("") == true || session.getAttribute("ID") == null) ){
+	if( session.getAttribute("GPWR") == null || (((String)session.getAttribute("ID")).equals("") == true || session.getAttribute("ID") == null) ){
 		%>
 		<script>
 		alert('잘못된 접근입니다.');
@@ -34,7 +34,6 @@
 	stmt = conn.createStatement();
 	stmt2 = conn.createStatement();
 	stmt3 = conn.createStatement();
-	
 	
 	rs2 = stmt2.executeQuery("select * from board where idx="+id);
 	rs3 = stmt3.executeQuery("select count(*) from article where board="+id);
