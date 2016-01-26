@@ -15,14 +15,12 @@
 		<%
 	}
 
-	int id = Integer.parseInt(request.getParameter("bcode"));	
+	int id = (Integer)session.getAttribute("GCODE");	
 	
 	Statement stmt;
-	Statement stmt2;
 	Statement stmt3;
 	
 	ResultSet rs;
-	ResultSet rs2;
 	ResultSet rs3;
 	
 	
@@ -32,15 +30,11 @@
 	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cider", "root","1234");
 	
 	stmt = conn.createStatement();
-	stmt2 = conn.createStatement();
 	stmt3 = conn.createStatement();
 	
-	rs2 = stmt2.executeQuery("select * from board where idx="+id);
-	rs3 = stmt3.executeQuery("select count(*) from article where board="+id);
-	rs2.next();
+	rs3 = stmt3.executeQuery("select count(*) from application where gidx="+id);
 	rs3.next();
 	
-	String name = rs2.getString("name");
 	
 	//페이징 처리
 	int cpage;
@@ -60,9 +54,9 @@
 		
 		if(cpage == tpage){
 			
-			rs = stmt.executeQuery("select * from article where board="+id+" ORDER BY idx DESC limit "+sta_idx+","+rs3.getInt("count(*)"));
+			rs = stmt.executeQuery("select * from application where gidx="+id+" ORDER BY idx DESC limit "+sta_idx+","+rs3.getInt("count(*)"));
 		}else{
-			rs = stmt.executeQuery("select * from article where board="+id+" ORDER BY idx DESC limit "+sta_idx+","+(sta_idx+10));
+			rs = stmt.executeQuery("select * from application where gidx="+id+" ORDER BY idx DESC limit "+sta_idx+","+(sta_idx+10));
 		}
 	}else{
 		cpage = Integer.parseInt(request.getParameter("pidx"));
@@ -72,9 +66,9 @@
 		
 		if(cpage == tpage){
 			
-			rs = stmt.executeQuery("select * from article where board="+id+" ORDER BY idx DESC limit "+sta_idx+","+(rs3.getInt("count(*)")-sta_idx));
+			rs = stmt.executeQuery("select * from application where gidx="+id+" ORDER BY idx DESC limit "+sta_idx+","+(rs3.getInt("count(*)")-sta_idx));
 		}else{
-			rs = stmt.executeQuery("select * from article where board="+id+" ORDER BY idx DESC limit "+sta_idx+","+sta_idx+9);
+			rs = stmt.executeQuery("select * from application where gidx="+id+" ORDER BY idx DESC limit "+sta_idx+","+sta_idx+9);
 		}
 	}
 	
@@ -129,7 +123,6 @@
                                     <th width=50>#</th>
                                    	<th >Subject</th>
                                     <th align="center" width=80>User</th>
-                                    <th>date</th>
                                 </tr>
                             </thead>
                             
@@ -137,11 +130,21 @@
                             <% 
                             	int b = (cpage == tpage) ? rs3.getInt("count(*)")-sta_idx : 10;
                             	for(int a=0 ; a < b; a++){
+                            		if(rs3.getInt("count(*)") == 0) {
+                            			%>
+                            			
+                            			<tr>
+                            				<td></td>
+                            				<td>신청자가 없습니다</td>
+                            			</tr>
+                            			<%
+                            			break;
+                            		}
                             		rs.next();
                             		%>
                             			<tr>
                             				<td><%=rs.getInt("idx") %></td>
-                            				<td><a href="..\pages\varticle.jsp?idx=<%=rs.getInt("idx") %>&bcode=<%=id %>"><%=rs.getString("subject") %></a></td>
+                            				<td><a href="..\pages\vaplic.jsp?idx=<%=rs.getInt("idx") %>&gcode=<%=id %>"><%=rs.getString("subject") %></a></td>
                             				<td><%=rs.getString("writer") %></td>
                             			</tr>
                             		<%
@@ -156,7 +159,7 @@
                         
                         if(tblock != 1 && cblock != 1){
                         	%>
-                        	 <a href="..\pages\vboard.jsp?pidx=<%=cpage - (cpage % 5)%>&bcode=<%=id %>"> [&lt;&lt;] </a>
+                        	 <a href="..\pages\apliclist.jsp?pidx=<%=cpage - (cpage % 5)%>&gcode=<%=id %>"> [&lt;&lt;] </a>
                         	<%
                         }
                         	
@@ -172,26 +175,23 @@
                         	}
                         	else{
                                 %>
-                                <a href="..\pages\vboard.jsp?pidx=<%=tmp+a %>&bcode=<%=id %>">[<%=tmp+a %>]</a>
+                                <a href="..\pages\apliclist.jsp?pidx=<%=tmp+a %>&gcode=<%=id %>">[<%=tmp+a %>]</a>
                               	<%
                         	}
                         }
                       	
                         if(tblock != 1 && cblock != tblock && cpage % 5 == 0){
                         	%>
-                        		<a href="..\pages\vboard.jsp?pidx=<%=cpage + 1%>&bcode=<%=id %>"> [&gt;&gt;] </a>
+                        		<a href="..\pages\apliclist.jsp?pidx=<%=cpage + 1%>&gcode=<%=id %>"> [&gt;&gt;] </a>
                         	<%
                         }else if(tblock != 1 && cblock != tblock){
                         	%>
-                      	 		<a href="..\pages\vboard.jsp?pidx=<%=cpage + (6 - (cpage % 5))%>&bcode=<%=id %>"> [&gt;&gt;] </a>
+                      	 		<a href="..\pages\apliclist.jsp?pidx=<%=cpage + (6 - (cpage % 5))%>&gcode=<%=id %>"> [&gt;&gt;] </a>
                       	 	<%
                         }
                       	%>
                 
                       	</div>
-                      	
-                      	
-                      	<div align=right><a class="btn btn-default" href="./warticle.jsp?bcode=<%=id %>">글쓰기</a></div>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -220,10 +220,8 @@
 <%
 	conn.close();
 	stmt.close();
-	stmt2.close();
 	stmt3.close();
 	rs.close();
-	rs2.close();
 	rs3.close();
 	
 %>

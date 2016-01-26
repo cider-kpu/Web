@@ -6,8 +6,7 @@
 
 <%
 	request.setCharacterEncoding("utf-8");
-	String tmps = (session.getAttribute("GCODE")).toString();
-	int id = Integer.parseInt(tmps);
+	int id = (Integer)session.getAttribute("GCODE");
 	
 	Statement stmt;
 	Statement stmt3;

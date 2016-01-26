@@ -18,7 +18,7 @@
 	}
 
 	int idx = Integer.parseInt(request.getParameter("idx"));
-	int bcode = Integer.parseInt(request.getParameter("bcode"));
+	int gcode = Integer.parseInt(request.getParameter("gcode"));
 
 	Connection conn=null;
 
@@ -28,7 +28,7 @@
 	Statement stmt = conn.createStatement();
 	
 	
-	ResultSet rs = stmt.executeQuery("select * from article where idx="+idx+" and board="+bcode);
+	ResultSet rs = stmt.executeQuery("select * from application where idx="+idx+" and gidx="+gcode);
 	rs.next();
 	
 	String title = null;
@@ -126,7 +126,7 @@ $(function(){
                 <div class="row">
                     <div class="col-lg-12">
                     <h1 class="page-header">글 수정</h1>
-						<form id="frm" action="../operation/amodifyp.jsp?idx=<%=idx %>&bcode=<%=bcode %>" method="post" >
+						<form id="frm" action="../operation/amodifyp.jsp?idx=<%=idx %>&gcode=<%=gcode %>&type=1" method="post" >
 							<table width="100%">
 								<tr>
 									<td>제목</td>
@@ -141,7 +141,7 @@ $(function(){
 								<tr>
 									<td colspan="2">
 										<input type="button" id="save" value="저장"/>
-										<a href="../pages/vboard.jsp?bcode=<%=bcode %>"><button type="button" value="취소">취소</button></a>
+										<a href="../pages/vaplic.jsp?gcode=<%=gcode %>&idx=<%=idx %>"><button type="button" value="취소">취소</button></a>
 									</td>
 								</tr>
 							</table>

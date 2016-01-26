@@ -33,16 +33,14 @@
 		rs2.next();
 		
 		int gcode = rs2.getInt("gcode");
-		String gcodes = Integer.toString(gcode);
-		session.setAttribute("GCODE", gcodes);
+		session.setAttribute("GCODE", gcode);
 		if(gcode != 0){
 			Statement stmt3 = conn.createStatement();
 			ResultSet rs3 = stmt3.executeQuery("select * from team where idx="+gcode);
 			rs3.next();
 			
 			session.setAttribute("GNAME", rs3.getString("name"));
-			gcodes = Integer.toString(rs2.getInt("gpwr"));
-			session.setAttribute("GPWR", gcodes);
+			session.setAttribute("GPWR", rs2.getInt("gpwr"));
 			
 		}
 		

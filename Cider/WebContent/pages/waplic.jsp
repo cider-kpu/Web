@@ -1,50 +1,54 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-	import="java.sql.*"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.util.*"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-<%    
-    //제대로 utf-8환경이 아니라 한글 깨짐 그래서 임의로 추가                                                   
-    request.setCharacterEncoding("utf-8");
-    
+<html>
+<%
 	String id = (String)session.getAttribute("ID");
-
+		
+	
 	if(id == null){
 		%>
 		<script>
-		location.href="../pages/login.html"
+			location.href="../pages/login.html"
 		</script>
 		<%
 	}
-
-	int idx = Integer.parseInt(request.getParameter("idx"));
-	int bcode = Integer.parseInt(request.getParameter("bcode"));
-
-	Connection conn=null;
-
-	Class.forName("com.mysql.jdbc.Driver");
-	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cider", "root","1234");
-
-	Statement stmt = conn.createStatement();
 	
-	
-	ResultSet rs = stmt.executeQuery("select * from article where idx="+idx+" and board="+bcode);
-	rs.next();
-	
-	String title = null;
-	String content = null;
-	
-	if(id.equals(rs.getString("writer"))){
-		title = rs.getString("subject");
-		content = rs.getString("contents");
-	}else{
+	if(request.getParameter("gcode") == null){
 		%>
 		<script>
-			alert('올바르지 않은 접근입니다.');
-			location.href="..\\pages\\warticle?bcode="+bcode;
+			location.href="../pages/teamlist.jsp"
 		</script>
 		<%
 	}
+	
+	int gcode = Integer.parseInt(request.getParameter("gcode"));
+	
+	Class.forName("com.mysql.jdbc.Driver");
+	Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cider", "root","1234");
+	
+	Statement stmt = conn.createStatement();
+	ResultSet rs = stmt.executeQuery("select count(*) from application where writer='"+id+"'"+" and gidx="+gcode);
+	rs.next();
+	
+	if(rs.getInt("count(*)") != 0){
+		
+		Statement stmt2 = conn.createStatement();
+		ResultSet rs2 = stmt2.executeQuery("select * from application where writer='"+id+"'"+" and gidx="+gcode);
+		rs2.next();
+		
+		response.sendRedirect("../pages/vaplic.jsp?idx="+rs2.getInt("idx")+"&gcode="+gcode);
+		
+		conn.close();
+		stmt.close();
+		stmt2.close();
+		rs.close();
+		rs2.close();
+	}
+	
+	
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -99,10 +103,6 @@ $(function(){
                    
               }
           }, 
-          fOnAppLoad : function(){
-              //기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-              oEditors.getById["ir1"].exec("PASTE_HTML", ["<%=content %>"]);
-          },
           fCreator: "createSEditor2"
       });
       
@@ -118,19 +118,19 @@ $(function(){
 </head>
 
 <body>
-	<%@include file="..\pages\manu.jsp" %>
+<%@include file="..\pages\manu.jsp" %>
 
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                    <h1 class="page-header">글 수정</h1>
-						<form id="frm" action="../operation/amodifyp.jsp?idx=<%=idx %>&bcode=<%=bcode %>" method="post" >
+                    <h1 class="page-header">가입 신청</h1>
+						<form id="frm" action="../operation/aplicinsert.jsp?gcode=<%=gcode %>" method="post" >
 							<table width="100%">
 								<tr>
 									<td>제목</td>
-									<td><input type="text" id="title" name="title" value="<%=title %>" style="width:650px"/></td>
+									<td><input type="text" id="title" name="title" style="width:650px"/></td>
 								</tr>
 								<tr>
 									<td>내용</td>
@@ -140,8 +140,8 @@ $(function(){
 								</tr>
 								<tr>
 									<td colspan="2">
-										<input type="button" id="save" value="저장"/>
-										<a href="../pages/vboard.jsp?bcode=<%=bcode %>"><button type="button" value="취소">취소</button></a>
+										<input type="button" class="btn btn-default" id="save" value="저장"/>
+										<a href="../pages/teamlist.jsp"><button type="button" class="btn btn-default">취소</button></a>
 									</td>
 								</tr>
 							</table>
@@ -171,9 +171,4 @@ $(function(){
     <script src="../dist/js/sb-admin-2.js"></script>
 
 </body>
-<%
-conn.close();
-stmt.close();
-rs.close();
-%>
 </html>

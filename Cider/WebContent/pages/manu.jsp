@@ -117,7 +117,7 @@
                         			<a href="#"> 맴버 관리<span class="fa arrow"></span></a>
                         			<ul class="nav nav-third-level">
                         			<li>
-                        				<a href="#"> 가입 신청 목록</a>
+                        				<a href="..\pages\apliclist.jsp"> 가입 신청 목록</a>
                         			</li>
                         			<li>
                         				<a href="..\pages\memberlist.jsp"> 회뭔 록록</a>

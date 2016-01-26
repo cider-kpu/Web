@@ -159,7 +159,7 @@
                             				<td><%=rs.getInt("idx") %></td>
                             				<td><%=rs.getString("name") %></td>
                             				<td><%=rs.getString("leader") %></td>
-                            				<td align=right><a href="#">가입신청</a></td>
+                            				<td align=right><a href="..\pages\waplic.jsp?gcode=<%=rs.getInt("idx") %>">가입신청</a></td>
                             			</tr>
                             		<%
                             		
