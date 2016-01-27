@@ -109,6 +109,7 @@
                             <ul class="nav nav-second-level">
                             <%
                             if( session.getAttribute("GCODE") != null && session.getAttribute("GPWR") != null){
+                        		if( (Integer)session.getAttribute("GPWR") != 0 ){
                         		%>
                         		<li>
                         			<a href="#"> 팀 관리</a>
@@ -124,8 +125,19 @@
                         			</li>
                         			</ul>
                         		</li>
+                        		<li>
+                        			<a href="..\pages\quitT.jsp"> 팀 탈퇴</a>
+                        		</li>
                        `	</ul>
                         		<%
+                        		}else{
+                        			%>
+                        			<li>
+                        				<a href="#"> 팀 탈퇴</a>
+                        			</li>
+                        	</ul>
+                        			<%
+                        		}
                         	}else if( session.getAttribute("ID") == null){
                             		%>
                             	<li>
@@ -139,7 +151,7 @@
                             		<a href="..\pages\teamlist.jsp"> 팀 가입하기</a>
                             	</li>
                             	<li>
-                            		<a href="#"> 팀 만들기</a>
+                            		<a href="..\pages\cteam.jsp"> 팀 만들기</a>
                             	</li>
                             </ul>
                             		<%

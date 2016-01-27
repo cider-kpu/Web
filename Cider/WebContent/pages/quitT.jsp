@@ -9,14 +9,7 @@
 	if(id == null){
 		%>
 		<script>
-		location.href="..\\pages\\login.html";
-		</script>
-		<%
-	}else if( (Integer)session.getAttribute("GCODE") != 0){
-		%>
-		<script>
-		alert("잘못된 접근!");
-		location.href="..\\pages\\index.jsp";
+		location.href="../pages/login.html"
 		</script>
 		<%
 	}
@@ -26,13 +19,6 @@
 	Class.forName("com.mysql.jdbc.Driver");
 	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cider", "root","1234");
 
-	stmt = conn.createStatement();
-	
-	ResultSet rs = stmt.executeQuery("select * from user where email='"+id+"'");
-	
-	rs.next();
-	
-	String email;
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -74,34 +60,30 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12">
-                    <h1 class="page-header">팀 만들기</h1>
-							<form action="../operation/cteamp.jsp" method="post">
-								<table class="table table-hover">
-                            		<tbody>
-                            		<tr>
-										<td>팀 이름 : </td>
-										<td><input type=text name=name placeholder="이름"></td>
-									</tr>
-									<tr>
-										<td>Leader : </td>
-										<td><input type="text" name=email placeholder="E-mail" value="<%=rs.getString("email") %>" disabled></td>
-									</tr>
-									<tr>
-										<td align="left"><input type="submit" class="btn btn-default" value="생성"></td>
-									</tr>
-									</tbody>
-								</table>
-							</form>
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading" align="center">
+                        <h3 class="panel-title">정말 탈퇴하시겠습니까?</h3>
                     </div>
-                    <!-- /.col-lg-12 -->
+                  	<div class="panel-body">
+                    	<form role="form" action="../operation/loginp.jsp" method="POST">
+                            <fieldset>
+                               	<!-- Change this to a button or input when using this as a form -->
+                              	<div class="from-group">
+                             	  		<table>
+                           	   				<tr>
+                             	 		 		<td><a href="..\operation\quitTp.jsp" class="btn btn-primary btn-lg">네</a></td>
+                             	 		 		<td><a href="..\pages\index.jsp" class="btn btn-default btn-lg" >아니오</a></td>
+                          	     			</tr>
+                           	    	</table>
+                           	    </div>
+                            </fieldset>
+                    	</form>
+                    </div>
                 </div>
-                <!-- /.row -->
             </div>
-            <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
-
     </div>
     <!-- /#wrapper -->
 
@@ -120,8 +102,6 @@
 </body>
 <%
 conn.close();
-stmt.close();
-rs.close();
 
 %>
 </html>

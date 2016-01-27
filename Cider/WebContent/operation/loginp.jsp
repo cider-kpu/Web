@@ -44,7 +44,7 @@
 			
 		}
 		
-		pageContext.forward("..\\pages\\index.jsp");
+		response.sendRedirect("..\\pages\\index.jsp");
 		
 		stmt2.close();
 		rs2.close();

@@ -161,6 +161,17 @@
                             				<td><%=rs.getString("email") %></td>
                             				<td><%=rs.getString("name") %></td>
                             				<td><%=rs.getString("pn") %></td>
+                            				<%
+                            				if(rs.getInt("gpwr") == 0 ){
+                            					%>
+                            				<td><a href="../operation/kick.jsp?id=<%=rs.getString("email") %>"> 추방하기 </a>
+                            					<%
+                            				}else if((Integer)session.getAttribute("GPWR") == 2 && !((String)session.getAttribute("ID")).equals(rs.getString("email")) ){
+                                				%>
+                                			<td><a href="../operation/kick.jsp?id=<%=rs.getString("email") %>"> 추방하기 </a>
+                                				<%
+                            				}
+                            				%>
                             			</tr>
                             		<%
                             		}

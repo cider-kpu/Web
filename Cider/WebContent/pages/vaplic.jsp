@@ -23,7 +23,33 @@
 	rs.next();
 	
 	String id = (String)session.getAttribute("ID");
-	if(id == null) id = "guest";
+	
+	// 로그인 확인 및 권환 체크
+	if(id == null) {
+		%>
+		<script>
+		location.href="../pages/login.html"
+		</script>
+		<%
+	}else if( !(id.equals(rs.getString("writer"))) ){
+		
+		if( (Integer)session.getAttribute("GCODE") != gcode){
+			%>
+			<script>
+			alert('잘못된 접근!');
+			location.href="../pages/index.jsp"
+			</script>
+			<%
+		}else if( (Integer)session.getAttribute("GPWR") == 0){
+		%>
+		<script>
+		alert('잘못된 접근!');
+		location.href="../pages/index.jsp"
+		</script>
+		<%
+		}
+	}
+	
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -80,9 +106,9 @@
                     	%>
                     	<div align=right><a href="../pages/aplicmodify.jsp?gcode=<%=gcode %>&idx=<%=idx %>&type=1"><button type="button" class="btn btn-default">수정</button></a> <a href="../operation/adelete.jsp?gcode=<%=gcode %>&idx=<%=idx %>&type=1"><button type="button" class="btn btn-default">삭제</button></a> </div>
                     	<%
-                    }else{
+                    }else if((Integer)session.getAttribute("GCODE") == gcode && (Integer)session.getAttribute("GPWR") != 0){
                     	%>
-                    	<div align=right><a href="../pages/apliclist.jsp "><button type="button" class="btn btn-default">승인</button></a> <a href="../pages/apliclist.jsp "><button type="button" class="btn btn-default">거부</button></a> <a href="../pages/apliclist.jsp "><button type="button" class="btn btn-default">목록</button></a>
+                    	<div align=right><a href="../operation/accept.jsp?&idx=<%=idx %>&gcode=<%=gcode %> "><button type="button" class="btn btn-default">승인</button></a> <a href="../operation/reject.jsp?gcode=<%=gcode%>&idx=<%=idx %> "><button type="button" class="btn btn-default">거부</button></a> <a href="../pages/apliclist.jsp "><button type="button" class="btn btn-default">목록</button></a>
                     	<%
                     }
                     %>
