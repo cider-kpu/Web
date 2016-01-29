@@ -118,7 +118,7 @@ $(function(){
 </head>
 
 <body>
-	<%@include file="..\pages\manu.jsp" %>
+	<%@include file="..\pages\menu.jsp" %>
 
         <!-- Page Content -->
         <div id="page-wrapper">

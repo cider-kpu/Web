@@ -105,58 +105,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-group fa-fw"></i> 팀 메뉴<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                            <%
-                            if( session.getAttribute("GCODE") != null && session.getAttribute("GPWR") != null){
-                        		if( (Integer)session.getAttribute("GPWR") != 0 ){
-                        		%>
-                        		<li>
-                        			<a href="#"> 팀 관리</a>
-                        		</li>
-                        		<li>
-                        			<a href="#"> 맴버 관리<span class="fa arrow"></span></a>
-                        			<ul class="nav nav-third-level">
-                        			<li>
-                        				<a href="..\pages\apliclist.jsp"> 가입 신청 목록</a>
-                        			</li>
-                        			<li>
-                        				<a href="..\pages\memberlist.jsp"> 회뭔 록록</a>
-                        			</li>
-                        			</ul>
-                        		</li>
-                        		<li>
-                        			<a href="..\pages\quitT.jsp"> 팀 탈퇴</a>
-                        		</li>
-                       `	</ul>
-                        		<%
-                        		}else{
-                        			%>
-                        			<li>
-                        				<a href="#"> 팀 탈퇴</a>
-                        			</li>
-                        	</ul>
-                        			<%
-                        		}
-                        	}else if( session.getAttribute("ID") == null){
-                            		%>
-                            	<li>
-                            		<a href="../pages/login.html">로그인</a>
-                            	</li>
-                            </ul>
-                            		<%
-                            	}else{
-                            		%>
-                            	<li>
-                            		<a href="..\pages\teamlist.jsp"> 팀 가입하기</a>
-                            	</li>
-                            	<li>
-                            		<a href="..\pages\cteam.jsp"> 팀 만들기</a>
-                            	</li>
-                            </ul>
-                            		<%
-                            	}
-                            %>
+                            <a href="..\pages\tindex.jsp"><i class="fa fa-group fa-fw"></i> 팀 메뉴</a>
                         </li>
                         <li>
                             <a href="..\pages\forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
@@ -220,6 +169,9 @@
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="..\pages\blank.jsp">Blank Page</a>
+                                </li>
+                                <li>
+                                    <a href="..\pages\blank.jsp">Sample manu</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

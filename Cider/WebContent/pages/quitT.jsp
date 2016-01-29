@@ -54,7 +54,7 @@
 </head>
 
 <body>
-<%@include file="..\pages\manu.jsp" %>
+<%@include file="..\pages\tmenu.jsp" %>
 
         <!-- Page Content -->
         <div id="page-wrapper">
@@ -72,8 +72,9 @@
                               	<div class="from-group">
                              	  		<table>
                            	   				<tr>
-                             	 		 		<td><a href="..\operation\quitTp.jsp" class="btn btn-primary btn-lg">네</a></td>
-                             	 		 		<td><a href="..\pages\index.jsp" class="btn btn-default btn-lg" >아니오</a></td>
+                             	 		 		<td align=left><a href="..\operation\quitTp.jsp" class="btn btn-primary btn-lg">네</a></td>
+                             	 		 		<td>        </td>
+                             	 		 		<td align=right><a href="..\pages\index.jsp" class="btn btn-default btn-lg" >아니오</a></td>
                           	     			</tr>
                            	    	</table>
                            	    </div>

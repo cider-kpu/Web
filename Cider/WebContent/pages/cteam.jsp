@@ -12,14 +12,8 @@
 		location.href="..\\pages\\login.html";
 		</script>
 		<%
-	}else if( (Integer)session.getAttribute("GCODE") != 0){
-		%>
-		<script>
-		alert("잘못된 접근!");
-		location.href="..\\pages\\index.jsp";
-		</script>
-		<%
 	}
+	
 	Statement stmt;
 	Connection conn=null;
 	
@@ -68,7 +62,7 @@
 </head>
 
 <body>
-<%@include file="..\pages\manu.jsp" %>
+<%@include file="..\pages\tmenu.jsp" %>
 
         <!-- Page Content -->
         <div id="page-wrapper">

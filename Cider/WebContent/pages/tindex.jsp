@@ -1,30 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    import="java.sql.*"
-%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
-<%
-	int idx = Integer.parseInt(request.getParameter("idx"));
-	int bcode = Integer.parseInt(request.getParameter("bcode"));	
-	
-	Statement stmt;
-	
-	ResultSet rs;
-	
-	Connection conn=null;
-
-	Class.forName("com.mysql.jdbc.Driver");
-	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cider", "root","1234");
-	
-	stmt = conn.createStatement();
-	
-	rs = stmt.executeQuery("select * from article where board="+bcode+" and idx="+idx);
-	rs.next();
-	
-	String id = (String)session.getAttribute("ID");
-	if(id == null) id = "guest";
-%>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -57,36 +34,22 @@
     <![endif]-->
 
 </head>
+
 <body>
-	<%@include file="..\pages\menu.jsp" %>
-	
+	<%@include file="..\pages\tmenu.jsp" %>
+
+
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                    <br>
-                                            <div class="panel panel-default">
-                        <div class="panel-heading">
-                        	<%=rs.getString("subject") %>
-                        </div>
-                        <div class="panel-body">
-							<%=rs.getString("contents") %>
-							<p class="lead" align=right><%=rs.getString("writer") %></p><p align=right><%=rs.getString("date") %></H5></p>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <%
-                    if(id.equals(rs.getString("writer"))){
-                    	%>
-                    	<div align=right><a href="../pages/amodify.jsp?bcode=<%=bcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">수정</button></a> <a href="../operation/adelete.jsp?bcode=<%=bcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">삭제</button></a> <a href="../pages/vboard.jsp?bcode=<%=bcode %>"><button type="button" class="btn btn-default">목록</button></a></div>
-                    	<%
-                    }else{
-                    	%>
-                    	<div align=right><a href="../pages/vboard.jsp?bcode=<%=bcode %>"><button type="button" class="btn btn-default">목록</button></a>
-                    	<%
-                    }
-                    %>
+                        <h1 class="page-header"><img src="../image/bn.png"></h1>
+							<%
+								String st = (String)session.getAttribute("ID");
+								if(st == null) out.print("WTF");
+								else out.print("Hello!");
+							%>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -112,9 +75,5 @@
     <script src="../dist/js/sb-admin-2.js"></script>
 
 </body>
-<%
-	conn.close();
-	stmt.close();
-	rs.close();
-%>
+
 </html>

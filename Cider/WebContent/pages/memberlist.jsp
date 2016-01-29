@@ -130,7 +130,7 @@
 </head>
 
 <body>
-<%@include file="..\pages\manu.jsp" %>
+<%@include file="..\pages\tmenu.jsp" %>
 
         <!-- Page Content -->
         <div id="page-wrapper">
