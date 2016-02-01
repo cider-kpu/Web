@@ -1,48 +1,78 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+    String ctx = request.getContextPath();    //ì½˜í…ìŠ¤íŠ¸ëª… ì–»ì–´ì˜¤ê¸°.
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 <html>
 <head>
-<meta charset="utf-8" />
-<title>³×ÀÌ¹ö ½º¸¶Æ® ¿¡µğÅÍ Àû¿ëÇÏ±â</title>
-<script type="text/javascript" src="./nse_files/js/HuskyEZCreator.js" charset="utf-8"></script>
-<style>
-.nse_content{width:660px;height:500px}
-</style>
-</head>
-<body>
-<form name="nse" action="add_db_nse.php" method="post">
-<textarea name="ir1" id="ir1" class="nse_content" >null</textarea>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>SmartEditor</title>
+
+<!-- SmartEditorë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•´ì„œ ë‹¤ìŒ jsíŒŒì¼ì„ ì¶”ê°€ (ê²½ë¡œ í™•ì¸) -->
+<script type="text/javascript" src="../se2/js/HuskyEZCreator.js" charset="utf-8"></script>
+<!-- jQueryë¥¼ ì‚¬ìš©í•˜ê¸°ìœ„í•´ jQueryë¼ì´ë¸ŒëŸ¬ë¦¬ ì¶”ê°€ -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+
 <script type="text/javascript">
 var oEditors = [];
-nhn.husky.EZCreator.createInIFrame({
-oAppRef: oEditors,
-elPlaceHolder: "ir1",
-sSkinURI: "../editor/SmartEditor2Skin.html",
-htParams : {
-	// Åø¹Ù »ç¿ë ¿©ºÎ (true:»ç¿ë/ false:»ç¿ëÇÏÁö ¾ÊÀ½)
-	bUseToolbar : true,				
-	// ÀÔ·ÂÃ¢ Å©±â Á¶Àı¹Ù »ç¿ë ¿©ºÎ (true:»ç¿ë/ false:»ç¿ëÇÏÁö ¾ÊÀ½)
-	bUseVerticalResizer : true,		
-	// ¸ğµå ÅÇ(Editor | HTML | TEXT) »ç¿ë ¿©ºÎ (true:»ç¿ë/ false:»ç¿ëÇÏÁö ¾ÊÀ½)
-	bUseModeChanger : true,			
-	fOnBeforeUnload : function(){
-		
-	}
-}, 
-fCreator: "createSEditor2"
+$(function(){
+      nhn.husky.EZCreator.createInIFrame({
+          oAppRef: oEditors,
+          elPlaceHolder: "ir1", //textareaì—ì„œ ì§€ì •í•œ idì™€ ì¼ì¹˜í•´ì•¼ í•©ë‹ˆë‹¤. 
+          //SmartEditor2Skin.html íŒŒì¼ì´ ì¡´ì¬í•˜ëŠ” ê²½ë¡œ
+          sSkinURI: "../se2/SmartEditor2Skin.html",  
+          htParams : {
+              // íˆ´ë°” ì‚¬ìš© ì—¬ë¶€ (true:ì‚¬ìš©/ false:ì‚¬ìš©í•˜ì§€ ì•ŠìŒ)
+              bUseToolbar : true,             
+              // ì…ë ¥ì°½ í¬ê¸° ì¡°ì ˆë°” ì‚¬ìš© ì—¬ë¶€ (true:ì‚¬ìš©/ false:ì‚¬ìš©í•˜ì§€ ì•ŠìŒ)
+              bUseVerticalResizer : true,     
+              // ëª¨ë“œ íƒ­(Editor | HTML | TEXT) ì‚¬ìš© ì—¬ë¶€ (true:ì‚¬ìš©/ false:ì‚¬ìš©í•˜ì§€ ì•ŠìŒ)
+              bUseModeChanger : true,         
+              fOnBeforeUnload : function(){
+                   
+              }
+          }, 
+          fOnAppLoad : function(){
+              //ê¸°ì¡´ ì €ì¥ëœ ë‚´ìš©ì˜ text ë‚´ìš©ì„ ì—ë””í„°ìƒì— ë¿Œë ¤ì£¼ê³ ì í• ë•Œ ì‚¬ìš©
+              oEditors.getById["ir1"].exec("PASTE_HTML", ["ê¸°ì¡´ DBì— ì €ì¥ëœ ë‚´ìš©ì„ ì—ë””í„°ì— ì ìš©í•  ë¬¸êµ¬"]);
+          },
+          fCreator: "createSEditor2"
+      });
+      
+      //ì €ì¥ë²„íŠ¼ í´ë¦­ì‹œ form ì „ì†¡
+      $("#save").click(function(){
+          oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+          $("#frm").submit();
+      });    
 });
-function submitContents(elClickedObj) {
-oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);	// ¿¡µğÅÍÀÇ ³»¿ëÀÌ textarea¿¡ Àû¿ëµË´Ï´Ù. 
-// ¿¡µğÅÍÀÇ ³»¿ë¿¡ ´ëÇÑ °ª °ËÁõÀº ÀÌ°÷¿¡¼­ document.getElementById("ir1").value¸¦ ÀÌ¿ëÇØ¼­ Ã³¸®ÇÏ¸é µË´Ï´Ù.
-
-try {
-elClickedObj.form.submit();
-} catch(e) {}
-}
+ 
+ 
+ 
 </script>
-<input type="submit" value="Àü¼Û" onclick="submitContents(this)" />
+ 
+</head>
+<body>
+<form id="frm" action="insert.jsp" method="post" >
+<table width="100%">
+        <tr>
+            <td>ì œëª©</td>
+            <td><input type="text" id="title" name="title" style="width:650px"/></td>
+        </tr>
+        <tr>
+            <td>ë‚´ìš©</td>
+            <td>
+                <textarea rows="10" cols="30" id="ir1" name="content" style="width:650px; height:350px; "></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="button" id="save" value="ì €ì¥"/>
+                <input type="button" value="ì·¨ì†Œ"/>
+            </td>
+        </tr>
+</table>
 </form>
+ 
 </body>
 </html>

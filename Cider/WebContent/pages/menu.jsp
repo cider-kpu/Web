@@ -104,9 +104,22 @@
 								%>
                             </ul>
                         </li>
+                        <%
+                        if(session.getAttribute("ID") == null){
+                        	
+                        %>
+                        <li>
+                            <a href="..\pages\login.html"><i class="fa fa-group fa-fw"></i> 팀 메뉴</a>
+                        </li>
+                        <%
+                        }else{
+                        %>
                         <li>
                             <a href="..\pages\tindex.jsp"><i class="fa fa-group fa-fw"></i> 팀 메뉴</a>
                         </li>
+                        <%
+                        }
+                        %>
                         <li>
                             <a href="..\pages\forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
                         </li>
