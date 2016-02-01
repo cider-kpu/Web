@@ -38,16 +38,16 @@
     <title>산속을 샅샅이</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Cider/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="/Cider/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/Cider/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/Cider/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -58,7 +58,7 @@
 
 </head>
 <body>
-	<%@include file="..\pages\menu.jsp" %>
+	<%@include file="..\menu.jsp" %>
 	
         <!-- Page Content -->
         <div id="page-wrapper">
@@ -79,11 +79,11 @@
                     <%
                     if(id.equals(rs.getString("writer"))){
                     	%>
-                    	<div align=right><a href="../pages/amodify.jsp?bcode=<%=bcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">수정</button></a> <a href="../operation/adelete.jsp?bcode=<%=bcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">삭제</button></a> <a href="../pages/vboard.jsp?bcode=<%=bcode %>"><button type="button" class="btn btn-default">목록</button></a></div>
+                    	<div align=right><a href="/Cider/pages/board/amodify.jsp?bcode=<%=bcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">수정</button></a> <a href="/Cider/operation/adelete.jsp?bcode=<%=bcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">삭제</button></a> <a href="/Cider/pages/board/vboard.jsp?bcode=<%=bcode %>"><button type="button" class="btn btn-default">목록</button></a></div>
                     	<%
                     }else{
                     	%>
-                    	<div align=right><a href="../pages/vboard.jsp?bcode=<%=bcode %>"><button type="button" class="btn btn-default">목록</button></a>
+                    	<div align=right><a href="/Cider/pages/board/vboard.jsp?bcode=<%=bcode %>"><button type="button" class="btn btn-default">목록</button></a>
                     	<%
                     }
                     %>
@@ -100,16 +100,16 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/Cider/bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/Cider/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="/Cider/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
+    <script src="/Cider/dist/js/sb-admin-2.js"></script>
 
 </body>
 <%

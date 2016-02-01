@@ -34,7 +34,7 @@
 	
 		stmt.executeUpdate("insert into application(idx, gidx, writer, contents, subject) values("+(rs2.getInt("max(idx)")+1)+", '"+gcode+"', '"+(String)session.getAttribute("ID")+"', '"+content+"', '"+title+"')");
 
-		response.sendRedirect("../pages/teamlist.jsp");
+		response.sendRedirect("/Cider/pages/team/teamlist.jsp");
 		
 		conn.close();
 		stmt.close();
@@ -46,7 +46,7 @@
 		%>
 		<script>
 			alert('입력되지 않은 데이터가 있습니다.');
-			location.href="..\\pages\\vboard?bcode="+bcode;
+			location.href="\\Cider\\pages\\team\\waplic?gcode="+idx;
 		</script>
 		<%	
 %>

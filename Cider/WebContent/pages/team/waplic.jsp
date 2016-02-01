@@ -1,50 +1,54 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-	import="java.sql.*"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.util.*"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-<%    
-    //제대로 utf-8환경이 아니라 한글 깨짐 그래서 임의로 추가                                                   
-    request.setCharacterEncoding("utf-8");
-    
+<html>
+<%
 	String id = (String)session.getAttribute("ID");
-
+		
+	
 	if(id == null){
 		%>
 		<script>
-		location.href="../pages/login.html"
+			location.href="/Cider/pages/login.html"
 		</script>
 		<%
 	}
-
-	int idx = Integer.parseInt(request.getParameter("idx"));
-	int gcode = Integer.parseInt(request.getParameter("gcode"));
-
-	Connection conn=null;
-
-	Class.forName("com.mysql.jdbc.Driver");
-	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cider", "root","1234");
-
-	Statement stmt = conn.createStatement();
 	
-	
-	ResultSet rs = stmt.executeQuery("select * from application where idx="+idx+" and gidx="+gcode);
-	rs.next();
-	
-	String title = null;
-	String content = null;
-	
-	if(id.equals(rs.getString("writer"))){
-		title = rs.getString("subject");
-		content = rs.getString("contents");
-	}else{
+	if(request.getParameter("gcode") == null){
 		%>
 		<script>
-			alert('올바르지 않은 접근입니다.');
-			location.href="..\\pages\\warticle?bcode="+bcode;
+			location.href="/Cider/pages/team/teamlist.jsp"
 		</script>
 		<%
 	}
+	
+	int gcode = Integer.parseInt(request.getParameter("gcode"));
+	
+	Class.forName("com.mysql.jdbc.Driver");
+	Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cider", "root","1234");
+	
+	Statement stmt = conn.createStatement();
+	ResultSet rs = stmt.executeQuery("select count(*) from application where writer='"+id+"'"+" and gidx="+gcode);
+	rs.next();
+	
+	if(rs.getInt("count(*)") != 0){
+		
+		Statement stmt2 = conn.createStatement();
+		ResultSet rs2 = stmt2.executeQuery("select * from application where writer='"+id+"'"+" and gidx="+gcode);
+		rs2.next();
+		
+		response.sendRedirect("/Cider/pages/team/vaplic.jsp?idx="+rs2.getInt("idx")+"&gcode="+gcode);
+		
+		conn.close();
+		stmt.close();
+		stmt2.close();
+		rs.close();
+		rs2.close();
+	}
+	
+	
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -59,16 +63,16 @@
     <title>산속을 샅샅이</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Cider/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="/Cider/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/Cider/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/Cider/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -77,7 +81,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="../editor/js/HuskyEZCreator.js"></script>
+<script type="text/javascript" charset="utf-8" src="/Cider/editor/js/HuskyEZCreator.js"></script>
 
 <!-- 에티터 스크립트 -->
 <script type="text/javascript">
@@ -87,7 +91,7 @@ $(function(){
           oAppRef: oEditors,
           elPlaceHolder: "ir1", //textarea에서 지정한 id와 일치해야 합니다. 
           //SmartEditor2Skin.html 파일이 존재하는 경로
-          sSkinURI: "../editor/SmartEditor2Skin.html",  
+          sSkinURI: "/Cider/editor/SmartEditor2Skin.html",  
           htParams : {
               // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
               bUseToolbar : true,             
@@ -99,10 +103,6 @@ $(function(){
                    
               }
           }, 
-          fOnAppLoad : function(){
-              //기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-              oEditors.getById["ir1"].exec("PASTE_HTML", ["<%=content %>"]);
-          },
           fCreator: "createSEditor2"
       });
       
@@ -118,19 +118,19 @@ $(function(){
 </head>
 
 <body>
-	<%@include file="..\pages\tmenu.jsp" %>
+<%@include file=".\tmenu.jsp" %>
 
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                    <h1 class="page-header">글 수정</h1>
-						<form id="frm" action="../operation/amodifyp.jsp?idx=<%=idx %>&gcode=<%=gcode %>&type=1" method="post" >
+                    <h1 class="page-header">가입 신청</h1>
+						<form id="frm" action="/Cider/operation/aplicinsert.jsp?gcode=<%=gcode %>" method="post" >
 							<table width="100%">
 								<tr>
 									<td>제목</td>
-									<td><input type="text" id="title" name="title" value="<%=title %>" style="width:650px"/></td>
+									<td><input type="text" id="title" name="title" style="width:650px"/></td>
 								</tr>
 								<tr>
 									<td>내용</td>
@@ -140,8 +140,8 @@ $(function(){
 								</tr>
 								<tr>
 									<td colspan="2">
-										<input type="button" id="save" value="저장"/>
-										<a href="../pages/vaplic.jsp?gcode=<%=gcode %>&idx=<%=idx %>"><button type="button" value="취소">취소</button></a>
+										<input type="button" class="btn btn-default" id="save" value="저장"/>
+										<a href="/Cider/pages/team/teamlist.jsp"><button type="button" class="btn btn-default">취소</button></a>
 									</td>
 								</tr>
 							</table>
@@ -159,21 +159,16 @@ $(function(){
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/Cider/bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/Cider/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="/Cider/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
+    <script src="/Cider/dist/js/sb-admin-2.js"></script>
 
 </body>
-<%
-conn.close();
-stmt.close();
-rs.close();
-%>
 </html>

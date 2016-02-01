@@ -12,7 +12,7 @@
 	if(id == null){
 		%>
 		<script>
-		location.href="../pages/login.html"
+		location.href="/Cider/pages/login.html"
 		</script>
 		<%
 	}
@@ -50,12 +50,12 @@
 			content = (String)request.getParameter("content");
 		
 			stmt2.executeUpdate("update application set subject='"+title+"', contents='"+content+"' where idx="+idx+" and gidx="+gcode);
-			response.sendRedirect("../pages/vaplic.jsp?idx="+idx+"&gcode="+gcode);
+			response.sendRedirect("/Cider/pages/team/vaplic.jsp?idx="+idx+"&gcode="+gcode);
 		}else{
 			%>
 			<script>
 				alert('올바르지 않은 접근입니다.');
-				location.href="..\\pages\\warticle?bcode="+bcode;
+				location.href="\\Cider\\pages\\index.jsp";
 			</script>
 			<%
 		}
@@ -76,12 +76,12 @@
 			content = (String)request.getParameter("content");
 		
 			stmt2.executeUpdate("update article set subject='"+title+"', contents='"+content+"' where idx="+idx+" and board="+bcode);
-			response.sendRedirect("../pages/vboard.jsp?bcode="+bcode);
+			response.sendRedirect("/Cider/pages/board/vboard.jsp?bcode="+bcode);
 		}else{
 			%>
 			<script>
 				alert('올바르지 않은 접근입니다.');
-				location.href="..\\pages\\warticle?bcode="+bcode;
+				location.href="\\Cider\\pages\\board\\warticle?bcode="+bcode;
 			</script>
 			<%
 		}

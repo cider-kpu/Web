@@ -18,16 +18,16 @@
     <title>산속을 샅샅이</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Cider/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="/Cider/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/Cider/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/Cider/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -51,7 +51,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="..\pages\index.jsp">산속을 샅샅이</a>
+                <a class="navbar-brand" href="/Cider/pages/index.jsp">산속을 샅샅이</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -65,14 +65,14 @@
                     <%
                     	if(session.getAttribute("ID") == null){
                     		%>
-                    		<li><a href="..\pages\login.html"><i class="fa fa-sign-in fa-fw"></i> Login</a>
+                    		<li><a href="/Cider/pages/login.html"><i class="fa fa-sign-in fa-fw"></i> Login</a>
                     		<%
                     	}else{
                     %>
-                        <li><a href="../pages/profile.jsp"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="/Cider/pages/profile.jsp"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="..\operation\logoutp.jsp"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="/Cider/operation/logoutp.jsp"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     <%
                     }
@@ -88,7 +88,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="..\pages\index.jsp"><i class="fa fa-home fa-fw"></i> 메인으로</a>
+                            <a href="/Cider/pages/index.jsp"><i class="fa fa-home fa-fw"></i> 메인으로</a>
                         </li>                    
                         <li>
                             <a href="#"><i class="fa fa-group fa-fw"></i> 팀 메뉴<span class="fa arrow"></span></a>
@@ -104,15 +104,15 @@
                         			<a href="#"> 맴버 관리<span class="fa arrow"></span></a>
                         			<ul class="nav nav-third-level">
                         			<li>
-                        				<a href="..\pages\apliclist.jsp"> 가입 신청 목록</a>
+                        				<a href="/Cider/pages/team/apliclist.jsp"> 가입 신청 목록</a>
                         			</li>
                         			<li>
-                        				<a href="..\pages\memberlist.jsp"> 회뭔 록록</a>
+                        				<a href="/Cider/pages/team/memberlist.jsp"> 회뭔 록록</a>
                         			</li>
                         			</ul>
                         		</li>
                         		<li>
-                        			<a href="..\pages\quitT.jsp"> 팀 탈퇴</a>
+                        			<a href="/Cider/pages/team/quitT.jsp"> 팀 탈퇴</a>
                         		</li>
                        `	</ul>
                         		<%
@@ -127,17 +127,17 @@
                         	}else if( session.getAttribute("ID") == null){
                             		%>
                             	<li>
-                            		<a href="../pages/login.html">로그인</a>
+                            		<a href="/Cider/pages/login.html">로그인</a>
                             	</li>
                             </ul>
                             		<%
                             	}else{
                             		%>
                             	<li>
-                            		<a href="..\pages\teamlist.jsp"> 팀 가입하기</a>
+                            		<a href="/Cider/pages/team/teamlist.jsp"> 팀 가입하기</a>
                             	</li>
                             	<li>
-                            		<a href="..\pages\cteam.jsp"> 팀 만들기</a>
+                            		<a href="/Cider/pages/team/cteam.jsp"> 팀 만들기</a>
                             	</li>
                             </ul>
                             		<%

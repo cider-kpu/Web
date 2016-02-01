@@ -37,7 +37,7 @@
 	
 		stmt.executeUpdate("insert into article(idx, subject, writer, contents, date, board) values("+(rs2.getInt("max(idx)")+1)+", '"+title+"', '"+(String)session.getAttribute("ID")+"', '"+content+"', '"+date+"', "+bcode+" )");
 
-		response.sendRedirect("../pages/vboard.jsp?bcode="+bcode);
+		response.sendRedirect("/Cider/pages/board/vboard.jsp?bcode="+bcode);
 		
 		conn.close();
 		stmt.close();
@@ -49,7 +49,7 @@
 		%>
 		<script>
 			alert('입력되지 않은 데이터가 있습니다.');
-			location.href="..\pages\vboard?bcode="+bcode;
+			location.href="/Cider/pages/board/vboard?bcode="+bcode;
 		</script>
 		<%	
 %>

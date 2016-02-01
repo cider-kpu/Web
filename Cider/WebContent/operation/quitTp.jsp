@@ -8,7 +8,7 @@
 		%>
 		<script>
 			alert('올바르지 않은 접근입니다.');
-			location.href="..\\pages\\warticle?bcode="+bcode;
+			location.href="\\Cider\\pages\\index.jsp";
 		</script>
 		<%
 	}
@@ -42,12 +42,12 @@
 			stmt2.close();
 			stmt4.close();
 			
-			response.sendRedirect("../pages/index.jsp");
+			response.sendRedirect("/Cider/pages/index.jsp");
 		}else{
 			%>
 			<script>
 				alert('다른 회원이 존재합니다. 리더를 바꾸거나 다른 회원이 없어야 합니다.');
-				location.href="..\\pages\\index.jsp";
+				location.href="/Cider/pages/team/index.jsp";
 			</script>
 			<%	
 		}

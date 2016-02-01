@@ -34,12 +34,12 @@
 		session.setAttribute("GCODE", gcode);
 		session.setAttribute("GPWR", 2);
 		
-		response.sendRedirect("..\\pages\\index.jsp");
+		response.sendRedirect("\\Cider\\pages\\index.jsp");
     }    	
 		%>
 		<script>
 			alert('입력되지 않은 데이터가 있습니다.');
-			location.href="..\\pages\\cteam.jsp";
+			location.href="\\Cider\\pages\\team\\cteam.jsp";
 		</script>
 		<%	
 %>

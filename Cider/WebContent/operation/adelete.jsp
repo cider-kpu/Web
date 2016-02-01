@@ -31,12 +31,12 @@
 		if(id.equals(rs.getString("writer"))){
 			stmt2.executeUpdate("delete from application where idx="+idx+" and gidx="+gcode);
 			
-			response.sendRedirect("../pages/teamlist.jsp");
+			response.sendRedirect("/Cider/pages/team/teamlist.jsp");
 		}else{
 			%>
 			<script>
 				alert('올바르지 않은 접근입니다.');
-				location.href="..\\pages\\warticle?bcode="+bcode;
+				location.href="\\Cider\\pages\\board\\warticle?bcode="+bcode;
 			</script>
 			<%
 		}
@@ -52,12 +52,12 @@
 		if(id.equals(rs.getString("writer"))){
 			stmt2.executeUpdate("delete from article where idx="+idx+" and board="+bcode);
 			
-			response.sendRedirect("../pages/vboard.jsp?bcode="+bcode);
+			response.sendRedirect("/Cider/pages/board/vboard.jsp?bcode="+bcode);
 		}else{
 			%>
 			<script>
 				alert('올바르지 않은 접근입니다.');
-				location.href="..\\pages\\warticle?bcode="+bcode;
+				location.href="\\Cider\\pages\\board\\warticle?bcode="+bcode;
 			</script>
 			<%
 		}

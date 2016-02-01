@@ -10,7 +10,7 @@
 		%>
 		<script>
 		alert('잘못된 접근입니다.');
-		location.href="..\\pages\\index.html";
+		location.href="/Cider/pages/index.html";
 		</script>
 		<%
 	}
@@ -88,16 +88,16 @@
     <title>산속을 샅샅이</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Cider/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="/Cider/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/Cider/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/Cider/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -109,7 +109,7 @@
 </head>
 
 <body>
-<%@include file="..\pages\tmenu.jsp" %>
+<%@include file=".\tmenu.jsp" %>
 
         <!-- Page Content -->
         <div id="page-wrapper">
@@ -144,7 +144,7 @@
                             		%>
                             			<tr>
                             				<td><%=rs.getInt("idx") %></td>
-                            				<td><a href="..\pages\vaplic.jsp?idx=<%=rs.getInt("idx") %>&gcode=<%=id %>"><%=rs.getString("subject") %></a></td>
+                            				<td><a href="/Cider/pages/team/vaplic.jsp?idx=<%=rs.getInt("idx") %>&gcode=<%=id %>"><%=rs.getString("subject") %></a></td>
                             				<td><%=rs.getString("writer") %></td>
                             			</tr>
                             		<%
@@ -159,7 +159,7 @@
                         
                         if(tblock != 1 && cblock != 1){
                         	%>
-                        	 <a href="..\pages\apliclist.jsp?pidx=<%=cpage - (cpage % 5)%>&gcode=<%=id %>"> [&lt;&lt;] </a>
+                        	 <a href="/Cider/pages/team/apliclist.jsp?pidx=<%=cpage - (cpage % 5)%>&gcode=<%=id %>"> [&lt;&lt;] </a>
                         	<%
                         }
                         	
@@ -175,18 +175,18 @@
                         	}
                         	else{
                                 %>
-                                <a href="..\pages\apliclist.jsp?pidx=<%=tmp+a %>&gcode=<%=id %>">[<%=tmp+a %>]</a>
+                                <a href="/Cider/pages/team/apliclist.jsp?pidx=<%=tmp+a %>&gcode=<%=id %>">[<%=tmp+a %>]</a>
                               	<%
                         	}
                         }
                       	
                         if(tblock != 1 && cblock != tblock && cpage % 5 == 0){
                         	%>
-                        		<a href="..\pages\apliclist.jsp?pidx=<%=cpage + 1%>&gcode=<%=id %>"> [&gt;&gt;] </a>
+                        		<a href="/Cider/pages/team/apliclist.jsp?pidx=<%=cpage + 1%>&gcode=<%=id %>"> [&gt;&gt;] </a>
                         	<%
                         }else if(tblock != 1 && cblock != tblock){
                         	%>
-                      	 		<a href="..\pages\apliclist.jsp?pidx=<%=cpage + (6 - (cpage % 5))%>&gcode=<%=id %>"> [&gt;&gt;] </a>
+                      	 		<a href="/Cider/pages/team/apliclist.jsp?pidx=<%=cpage + (6 - (cpage % 5))%>&gcode=<%=id %>"> [&gt;&gt;] </a>
                       	 	<%
                         }
                       	%>
@@ -205,16 +205,16 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/Cider/bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/Cider/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="/Cider/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
+    <script src="/Cider/dist/js/sb-admin-2.js"></script>
 
 </body>
 <%

@@ -6,6 +6,7 @@
 
 <%
 	request.setCharacterEncoding("utf-8");
+	int id = (Integer)session.getAttribute("GCODE");
 	
 	Statement stmt;
 	Statement stmt3;
@@ -24,17 +25,19 @@
 	String search = null;
 	
 	if(request.getParameter("search") == null){
-		rs3 = stmt3.executeQuery("select count(*) from team");
+		rs3 = stmt3.executeQuery("select count(*) from user where gcode="+id);
 	}else{
 		if( request.getMethod() == "GET" ){
 			search =(String)request.getParameter("search");
 			search = new String(search .getBytes("8859_1"), "UTF-8");
 		}else
 		search =(String)request.getParameter("search");
-		rs3 = stmt3.executeQuery("select count(*) from team where name like '%"+search+"%'");
+		
+		rs3 = stmt3.executeQuery("select count(*) from user where email like '%"+search+"%' and gcode="+id);
 	}
 	
 	rs3.next();
+	
 	
 	//페이징 처리
 	int cpage;  // 현재 페이지
@@ -54,16 +57,16 @@
 		
 		if(cpage == tpage){
 			if(search == null || search.equals("") == true){
-				rs = stmt.executeQuery("select * from team ORDER BY idx DESC limit "+sta_idx+","+rs3.getInt("count(*)"));
+				rs = stmt.executeQuery("select * from user where gcode="+id+" limit "+sta_idx+","+rs3.getInt("count(*)"));
 			}else{
-				rs = stmt.executeQuery("select * from team where name like '%"+search+"%' ORDER BY idx DESC limit "+sta_idx+","+rs3.getInt("count(*)"));
+				rs = stmt.executeQuery("select * from user where email like '%"+search+"%' and gcode="+id+" limit "+sta_idx+","+rs3.getInt("count(*)"));
 			}
 			
 		}else{
 			if(search == null || search.equals("") == true){
-				rs = stmt.executeQuery("select * from article ORDER BY idx DESC limit "+sta_idx+","+(sta_idx+10));
+				rs = stmt.executeQuery("select * from user where gcode="+id+" limit "+sta_idx+","+(sta_idx+10));
 			}else{
-				rs = stmt.executeQuery("select * from article where name like '%"+search+"%' and ORDER BY idx DESC limit "+sta_idx+","+(sta_idx+10));
+				rs = stmt.executeQuery("select * from user where email like '%"+search+"%' and gcode="+id+" limit "+sta_idx+","+(sta_idx+10));
 			}
 			
 		}
@@ -75,16 +78,16 @@
 		
 		if(cpage == tpage){
 			if(search == null || search.equals("") == true){
-				rs = stmt.executeQuery("select * from article ORDER BY idx DESC limit "+sta_idx+","+(rs3.getInt("count(*)")-sta_idx));
+				rs = stmt.executeQuery("select * from user where gcode="+id+" limit "+sta_idx+","+(rs3.getInt("count(*)")-sta_idx));
 			}else{
-				rs = stmt.executeQuery("select * from article where name like '%"+search+"%' ORDER BY idx DESC limit "+sta_idx+","+(rs3.getInt("count(*)")-sta_idx));
+				rs = stmt.executeQuery("select * from user where email like '%"+search+"%' and gcode="+id+" limit "+sta_idx+","+(rs3.getInt("count(*)")-sta_idx));
 			}
 			
 		}else{
 			if(search == null || search.equals("") == true){
-				rs = stmt.executeQuery("select * from article ORDER BY idx DESC limit "+sta_idx+","+sta_idx+9);
+				rs = stmt.executeQuery("select * from user where gcode="+id+" limit "+sta_idx+","+sta_idx+9);
 			}else{
-				rs = stmt.executeQuery("select * from article where name like '%"+search+"%' ORDER BY idx DESC limit "+sta_idx+","+sta_idx+9);
+				rs = stmt.executeQuery("select * from user where email like '%"+search+"%' and gcode="+id+" limit "+sta_idx+","+sta_idx+9);
 			}
 			
 		}
@@ -106,16 +109,16 @@
     <title>산속을 샅샅이</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Cider/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="/Cider/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/Cider/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/Cider/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -127,21 +130,20 @@
 </head>
 
 <body>
-<%@include file="..\pages\tmenu.jsp" %>
+<%@include file=".\tmenu.jsp" %>
 
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">팀 리스트</h1>
+                        <h1 class="page-header">회원 목록</h1>
                        	<table class="table table-hover">
                         	<thead>
                                 <tr>
-                                    <th width=50>#</th>
+                                    <th >Email</th>
                                    	<th >name</th>
-                                    <th align="center" width=80>Leader</th>
-                                    <th></th>
+                                    <th >Phone-Number</th>
                                 </tr>
                             </thead>
                             
@@ -156,13 +158,22 @@
                             		
                             		%>
                             			<tr>
-                            				<td><%=rs.getInt("idx") %></td>
+                            				<td><%=rs.getString("email") %></td>
                             				<td><%=rs.getString("name") %></td>
-                            				<td><%=rs.getString("leader") %></td>
-                            				<td align=right><a href="..\pages\waplic.jsp?gcode=<%=rs.getInt("idx") %>">가입신청</a></td>
+                            				<td><%=rs.getString("pn") %></td>
+                            				<%
+                            				if(rs.getInt("gpwr") == 0 ){
+                            					%>
+                            				<td><a href="/Cider/operation/kick.jsp?id=<%=rs.getString("email") %>"> 추방하기 </a>
+                            					<%
+                            				}else if((Integer)session.getAttribute("GPWR") == 2 && !((String)session.getAttribute("ID")).equals(rs.getString("email")) ){
+                                				%>
+                                			<td><a href="/Cider/operation/kick.jsp?id=<%=rs.getString("email") %>"> 추방하기 </a>
+                                				<%
+                            				}
+                            				%>
                             			</tr>
                             		<%
-                            		
                             		}
                             	}
                             %>
@@ -177,11 +188,11 @@
                         	
                         	if(search == null || search.equals("") == true){
                         	%>
-                        	 <a href="..\pages\teamlist.jsp?pidx=<%=cpage - (cpage % 5)%>"> [&lt;&lt;] </a>
+                        	 <a href="/Cider/pages/team/memberlist.jsp?pidx=<%=cpage - (cpage % 5)%>"> [&lt;&lt;] </a>
                         	<%
                         	}else{
                             	%>
-                          		 <a href="..\pages\teamlist.jsp?search=<%=search %>&pidx=<%=cpage - (cpage % 5)%>"> [&lt;&lt;] </a>
+                          		 <a href="/Cider/pages/team/memberlist.jsp?search=<%=search %>&pidx=<%=cpage - (cpage % 5)%>"> [&lt;&lt;] </a>
                           		<%
                         	}
                         }
@@ -200,11 +211,11 @@
                         		
                         		if(search == null || search.equals("") == true){
                                 %>
-                                <a href="..\pages\teamlist.jsp?pidx=<%=tmp+a %>">[<%=tmp+a %>]</a>
+                                <a href="/Cider/pages/team/memberlist.jsp?pidx=<%=tmp+a %>">[<%=tmp+a %>]</a>
                               	<%
                         		}else{
                                     %>
-                                    <a href="..\pages\teamlist.jsp?search=<%=search %>&pidx=<%=tmp+a %>">[<%=tmp+a %>]</a>
+                                    <a href="/Cider/pages/team/memberlist.jsp?search=<%=search %>&pidx=<%=tmp+a %>">[<%=tmp+a %>]</a>
                                   	<%
                         		}
                         	}
@@ -213,21 +224,21 @@
                         if(tblock != 1 && cblock != tblock && cpage % 5 == 0){
                         	if(search == null || search.equals("") == true){
                         	%>
-                        		<a href="..\pages\teamlist.jsp?pidx=<%=cpage + 1%>"> [&gt;&gt;] </a>
+                        		<a href="/Cider/pages/team/memberlist.jsp?pidx=<%=cpage + 1%>"> [&gt;&gt;] </a>
                         	<%
                         	}else{
                             	%>
-                        			<a href="..\pages\teamlist.jsp?search=<%=search %>&pidx=<%=cpage + 1%>"> [&gt;&gt;] </a>
+                        			<a href="/Cider/pages/team/memberlist.jsp?search=<%=search %>&pidx=<%=cpage + 1%>"> [&gt;&gt;] </a>
                         		<%
                         	}
                         }else if(tblock != 1 && cblock != tblock){
                         	if(search == null || search.equals("") == true){
                         	%>
-                      	 		<a href="..\pages\teamlist.jsp?pidx=<%=cpage + (6 - (cpage % 5))%>"> [&gt;&gt;] </a>
+                      	 		<a href="/Cider/pages/team/memberlist.jsp?pidx=<%=cpage + (6 - (cpage % 5))%>"> [&gt;&gt;] </a>
                       	 	<%
                         	}else{
                             	%>
-                      	 			<a href="..\pages\teamlist.jsp?search=<%=search %>&pidx=<%=cpage + (6 - (cpage % 5))%>"> [&gt;&gt;] </a>
+                      	 			<a href="/Cider/pages/team/memberlist.jsp?search=<%=search %>&pidx=<%=cpage + (6 - (cpage % 5))%>"> [&gt;&gt;] </a>
                       	 		<%
                         	}
                         }
@@ -238,13 +249,13 @@
                       	<%
                       		if(search == null || search.equals("") == true){
                       			%>
-                      		<form action="../pages/teamlist.jsp" method="post">
+                      		<form action="/Cider/pages/team/memberlist.jsp" method="post">
                       			<input type="text" name="search" id="search"> <input type="submit" value="검색">
                      	 	</form>
                       			<%
                       		}else{
                       			%>
-                      		<form action="../pages/teamlist.jsp" method="post">
+                      		<form action="/Cider/pages/team/memberlist.jsp" method="post">
                       			<input type="text" name="search" id="search" value="<%=search%>"> <input type="submit" value="검색">
                      	 	</form>
                       			<%
@@ -266,16 +277,16 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/Cider/bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/Cider/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="/Cider/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
+    <script src="/Cider/dist/js/sb-admin-2.js"></script>
 
 </body>
 <%
@@ -284,5 +295,6 @@
 	stmt3.close();
 	rs.close();
 	rs3.close();
+	
 %>
 </html>

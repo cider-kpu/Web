@@ -51,7 +51,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="..\pages\index.jsp">산속을 샅샅이</a>
+                <a class="navbar-brand" href="/Cider/pages/index.jsp">산속을 샅샅이</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -65,11 +65,11 @@
                     <%
                     	if(session.getAttribute("ID") == null){
                     		%>
-                    		<li><a href="..\pages\login.html"><i class="fa fa-sign-in fa-fw"></i> Login</a>
+                    		<li><a href="./login.html"><i class="fa fa-sign-in fa-fw"></i> Login</a>
                     		<%
                     	}else{
                     %>
-                        <li><a href="../pages/profile.jsp"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="./profile.jsp"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="..\operation\logoutp.jsp"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -88,7 +88,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="..\pages\index.jsp"><i class="fa fa-home fa-fw"></i> 메인</a>
+                            <a href="/Cider/pages/index.jsp"><i class="fa fa-home fa-fw"></i> 메인</a>
                         </li>                    
                         <li>
                             <a href="#"><i class="fa fa-th-list fa-fw"></i> 게시판<span class="fa arrow"></span></a>
@@ -97,7 +97,7 @@
 									
 										%>
 											<li>
-												<a href="..\pages\vboard.jsp?bcode=1"></i> 공개 게시판</a>
+												<a href="/Cider/pages/board/vboard.jsp?bcode=1"></i> 공개 게시판</a>
 											</li>
 										<%
 									
@@ -109,40 +109,40 @@
                         	
                         %>
                         <li>
-                            <a href="..\pages\login.html"><i class="fa fa-group fa-fw"></i> 팀 메뉴</a>
+                            <a href="/Cider/pages/login.html"><i class="fa fa-group fa-fw"></i> 팀 메뉴</a>
                         </li>
                         <%
                         }else{
                         %>
                         <li>
-                            <a href="..\pages\tindex.jsp"><i class="fa fa-group fa-fw"></i> 팀 메뉴</a>
+                            <a href="/Cider/pages/team/tindex.jsp"><i class="fa fa-group fa-fw"></i> 팀 메뉴</a>
                         </li>
                         <%
                         }
                         %>
                         <li>
-                            <a href="..\pages\forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                            <a href="/Cider/pages/forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="..\pages\panels-wells.html">Panels and Wells</a>
+                                    <a href="/Cider/pages/panels-wells.html">Panels and Wells</a>
                                 </li>
                                 <li>
-                                    <a href="..\pages\buttons.html">Buttons</a>
+                                    <a href="/Cider/pages/buttons.html">Buttons</a>
                                 </li>
                                 <li>
-                                    <a href="..\pages\notifications.html">Notifications</a>
+                                    <a href="/Cider/pages/notifications.html">Notifications</a>
                                 </li>
                                 <li>
-                                    <a href="..\pages\typography.html">Typography</a>
+                                    <a href="/Cider/pages/typography.html">Typography</a>
                                 </li>
                                 <li>
-                                    <a href="..\pages\icons.html"> Icons</a>
+                                    <a href="/Cider/pages/icons.html"> Icons</a>
                                 </li>
                                 <li>
-                                    <a href="..\pages\grid.html">Grid</a>
+                                    <a href="/Cider/pages/grid.html">Grid</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -181,10 +181,10 @@
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="..\pages\blank.jsp">Blank Page</a>
+                                    <a href="/Cider/pages/blank.jsp">Blank Page</a>
                                 </li>
                                 <li>
-                                    <a href="..\pages\blank.jsp">Sample manu</a>
+                                    <a href="/Cider/pages/blank.jsp">Sample manu</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

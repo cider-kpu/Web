@@ -116,16 +116,16 @@
     <title>산속을 샅샅이</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Cider/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="/Cider/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/Cider/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/Cider/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -137,7 +137,7 @@
 </head>
 
 <body>
-<%@include file="..\pages\menu.jsp" %>
+<%@include file="..\menu.jsp" %>
 
         <!-- Page Content -->
         <div id="page-wrapper">
@@ -168,7 +168,7 @@
                             		%>
                             			<tr>
                             				<td><%=rs.getInt("idx") %></td>
-                            				<td><a href="..\pages\varticle.jsp?idx=<%=rs.getInt("idx") %>&bcode=<%=id %>"><%=rs.getString("subject") %></a></td>
+                            				<td><a href="./varticle.jsp?idx=<%=rs.getInt("idx") %>&bcode=<%=id %>"><%=rs.getString("subject") %></a></td>
                             				<td><%=rs.getString("writer") %></td>
                             				<td><%=rs.getString("date") %></td>
                             			</tr>
@@ -187,11 +187,11 @@
                         	
                         	if(search == null || search.equals("") == true){
                         	%>
-                        	 <a href="..\pages\vboard.jsp?pidx=<%=cpage - (cpage % 5)%>&bcode=<%=id %>"> [&lt;&lt;] </a>
+                        	 <a href="./vboard.jsp?pidx=<%=cpage - (cpage % 5)%>&bcode=<%=id %>"> [&lt;&lt;] </a>
                         	<%
                         	}else{
                             	%>
-                          		 <a href="..\pages\vboard.jsp?search=<%=search %>&pidx=<%=cpage - (cpage % 5)%>&bcode=<%=id %>"> [&lt;&lt;] </a>
+                          		 <a href="./vboard.jsp?search=<%=search %>&pidx=<%=cpage - (cpage % 5)%>&bcode=<%=id %>"> [&lt;&lt;] </a>
                           		<%
                         	}
                         }
@@ -210,11 +210,11 @@
                         		
                         		if(search == null || search.equals("") == true){
                                 %>
-                                <a href="..\pages\vboard.jsp?pidx=<%=tmp+a %>&bcode=<%=id %>">[<%=tmp+a %>]</a>
+                                <a href="./vboard.jsp?pidx=<%=tmp+a %>&bcode=<%=id %>">[<%=tmp+a %>]</a>
                               	<%
                         		}else{
                                     %>
-                                    <a href="..\pages\vboard.jsp?search=<%=search %>&pidx=<%=tmp+a %>&bcode=<%=id %>">[<%=tmp+a %>]</a>
+                                    <a href="./vboard.jsp?search=<%=search %>&pidx=<%=tmp+a %>&bcode=<%=id %>">[<%=tmp+a %>]</a>
                                   	<%
                         		}
                         	}
@@ -223,21 +223,21 @@
                         if(tblock != 1 && cblock != tblock && cpage % 5 == 0){
                         	if(search == null || search.equals("") == true){
                         	%>
-                        		<a href="..\pages\vboard.jsp?pidx=<%=cpage + 1%>&bcode=<%=id %>"> [&gt;&gt;] </a>
+                        		<a href="./vboard.jsp?pidx=<%=cpage + 1%>&bcode=<%=id %>"> [&gt;&gt;] </a>
                         	<%
                         	}else{
                             	%>
-                        			<a href="..\pages\vboard.jsp?search=<%=search %>&pidx=<%=cpage + 1%>&bcode=<%=id %>"> [&gt;&gt;] </a>
+                        			<a href="./vboard.jsp?search=<%=search %>&pidx=<%=cpage + 1%>&bcode=<%=id %>"> [&gt;&gt;] </a>
                         		<%
                         	}
                         }else if(tblock != 1 && cblock != tblock){
                         	if(search == null || search.equals("") == true){
                         	%>
-                      	 		<a href="..\pages\vboard.jsp?pidx=<%=cpage + (6 - (cpage % 5))%>&bcode=<%=id %>"> [&gt;&gt;] </a>
+                      	 		<a href="./vboard.jsp?pidx=<%=cpage + (6 - (cpage % 5))%>&bcode=<%=id %>"> [&gt;&gt;] </a>
                       	 	<%
                         	}else{
                             	%>
-                      	 			<a href="..\pages\vboard.jsp?search=<%=search %>&pidx=<%=cpage + (6 - (cpage % 5))%>&bcode=<%=id %>"> [&gt;&gt;] </a>
+                      	 			<a href="./vboard.jsp?search=<%=search %>&pidx=<%=cpage + (6 - (cpage % 5))%>&bcode=<%=id %>"> [&gt;&gt;] </a>
                       	 		<%
                         	}
                         }
@@ -248,13 +248,13 @@
                       	<%
                       		if(search == null || search.equals("") == true){
                       			%>
-                      		<form action="../pages/vboard.jsp?bcode=<%=id%>" method="post">
+                      		<form action="/Cider/pages/board/vboard.jsp?bcode=<%=id%>" method="post">
                       			<input type="text" name="search" id="search"> <input type="submit" value="검색">
                      	 	</form>
                       			<%
                       		}else{
                       			%>
-                      		<form action="../pages/vboard.jsp?bcode=<%=id%>" method="post">
+                      		<form action="/Cider/pages/board/vboard.jsp?bcode=<%=id%>" method="post">
                       			<input type="text" name="search" id="search" value="<%=search%>"> <input type="submit" value="검색">
                      	 	</form>
                       			<%
@@ -276,16 +276,16 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/Cider/bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/Cider/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="/Cider/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
+    <script src="/Cider/dist/js/sb-admin-2.js"></script>
 
 </body>
 <%

@@ -19,7 +19,7 @@
 	name = new String(name.getBytes("8859_1"), "euc-kr");
 
 	stmt.executeUpdate("update user set pn='"+pn+"', name='"+name+"'"+", pw='"+pw+"' where email='"+email+"'");
-	pageContext.forward("../pages/profile.jsp");
+	pageContext.forward("/Cider/pages/profile.jsp");
 	
 	stmt.close();
 	conn.close();

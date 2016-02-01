@@ -29,13 +29,13 @@
 		stmt2.close();
 		conn.close();
 		rs.close();
-		response.sendRedirect("..\\pages\\login.html");
+		response.sendRedirect("/Cider/pages/login.html");
 		
 	}
 	%>
 	<script>
 		alert('이미 존재하는 Email 입니다.');
-		location.href="..\\pages\\signin.jsp";
+		location.href="/Cider/pages/signin.jsp";
 	</script>
 	<%	
 	stmt.close();

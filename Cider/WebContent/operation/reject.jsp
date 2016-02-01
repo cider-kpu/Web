@@ -23,12 +23,12 @@
 	if( (Integer)session.getAttribute("GCODE") == gcode && (Integer)session.getAttribute("GPWR") != 0 ){
 		stmt2.executeUpdate("delete from application where idx="+idx+" and gidx="+gcode);
 			
-		response.sendRedirect("../pages/apliclist.jsp");
+		response.sendRedirect("/Cider/pages/team/apliclist.jsp");
 	}else{
 		%>
 		<script>
 			alert('올바르지 않은 접근입니다.');
-			location.href="..\\pages\\warticle?bcode="+bcode;
+			location.href="/Cider/pages/index.jsp";
 		</script>
 		<%
 	}	

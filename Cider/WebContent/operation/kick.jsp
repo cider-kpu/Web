@@ -13,7 +13,7 @@
 	Statement stmt = conn.createStatement();
 	stmt.executeUpdate("update user set gcode=0, gpwr=0 where email='"+id+"'");
 	
-	pageContext.forward("../pages/memberlist.jsp");
+	pageContext.forward("/Cider/pages/team/memberlist.jsp");
 	
 	stmt.close();
 	conn.close();

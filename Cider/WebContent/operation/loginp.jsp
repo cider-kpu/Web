@@ -44,7 +44,7 @@
 			
 		}
 		
-		response.sendRedirect("..\\pages\\index.jsp");
+		response.sendRedirect("/Cider/pages/index.jsp");
 		
 		stmt2.close();
 		rs2.close();
@@ -52,7 +52,7 @@
 	%>
 	<script>
 		alert('잘못된 Email 또는 Password 입니다.');
-		location.href="..\\pages\\login.html";
+		location.href="\\Cider\\pages\\login.html";
 	</script>
 	<%	
 	stmt.close();
