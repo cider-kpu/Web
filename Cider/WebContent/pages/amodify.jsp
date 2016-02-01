@@ -99,10 +99,7 @@ $(function(){
                    
               }
           }, 
-          fOnAppLoad : function(){
-              //기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-              oEditors.getById["ir1"].exec("PASTE_HTML", ["<%=content %>"]);
-          },
+
           fCreator: "createSEditor2"
       });
       
@@ -135,7 +132,7 @@ $(function(){
 								<tr>
 									<td>내용</td>
 									<td>
-									<textarea rows="10" cols="30" id="ir1" name="content" style="width:650px; height:350px; "></textarea>
+									<textarea rows="10" cols="30" id="ir1" name="content" style="width:650px; height:350px; "><%=content %></textarea>
 									</td>
 								</tr>
 								<tr>

@@ -64,7 +64,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="../se2/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8" src="../editor/js/HuskyEZCreator.js"></script>
 
 <!-- 에티터 스크립트 -->
 <script type="text/javascript">
@@ -74,7 +74,7 @@ $(function(){
           oAppRef: oEditors,
           elPlaceHolder: "ir1", //textarea에서 지정한 id와 일치해야 합니다. 
           //SmartEditor2Skin.html 파일이 존재하는 경로
-          sSkinURI: "../se2/SmartEditor2Skin.html",  
+          sSkinURI: "../editor/SmartEditor2Skin.html",  
           htParams : {
               // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
               bUseToolbar : true,             
@@ -118,7 +118,7 @@ $(function(){
 								<tr>
 									<td>내용</td>
 									<td>
-									<textarea rows="10" cols="30" id="ir1" name="contents" style="width:650px; height:350px; "></textarea>
+									<textarea rows="10" cols="30" id="ir1" name="content" style="width:650px; height:350px; "></textarea>
 									</td>
 								</tr>
 								<tr>
