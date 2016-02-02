@@ -74,7 +74,7 @@
                            	   				<tr>
                              	 		 		<td align=left><a href="/Cider/operation/quitTp.jsp" class="btn btn-primary btn-lg">네</a></td>
                              	 		 		<td>        </td>
-                             	 		 		<td align=right><a href="/Cider/pages/index.jsp" class="btn btn-default btn-lg" >아니오</a></td>
+                             	 		 		<td align=right><a href="/Cider/pages/team/tindex.jsp" class="btn btn-default btn-lg" >아니오</a></td>
                           	     			</tr>
                            	    	</table>
                            	    </div>

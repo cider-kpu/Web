@@ -144,6 +144,7 @@
                                     <th >Email</th>
                                    	<th >name</th>
                                     <th >Phone-Number</th>
+                                    <th ></th>
                                 </tr>
                             </thead>
                             
@@ -161,6 +162,7 @@
                             				<td><%=rs.getString("email") %></td>
                             				<td><%=rs.getString("name") %></td>
                             				<td><%=rs.getString("pn") %></td>
+                            				
                             				<%
                             				if(rs.getInt("gpwr") == 0 ){
                             					%>

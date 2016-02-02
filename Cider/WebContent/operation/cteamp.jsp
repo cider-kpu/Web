@@ -15,7 +15,7 @@
   		String email = (String)session.getAttribute("ID");
     
     	Connection conn=null;
-	
+    	
 		Class.forName("com.mysql.jdbc.Driver");
 		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cider", "root","1234");
 		
@@ -34,12 +34,12 @@
 		session.setAttribute("GCODE", gcode);
 		session.setAttribute("GPWR", 2);
 		
-		response.sendRedirect("\\Cider\\pages\\index.jsp");
+		response.sendRedirect("/Cider/pages/index.jsp");
     }    	
 		%>
 		<script>
 			alert('입력되지 않은 데이터가 있습니다.');
-			location.href="\\Cider\\pages\\team\\cteam.jsp";
+			location.href="/Cider/pages/team/cteam.jsp";
 		</script>
 		<%	
 %>

@@ -1,8 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    %>
+    import="java.sql.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
+<%
+
+Connection mconn=null;
+
+Class.forName("com.mysql.jdbc.Driver");
+mconn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cider", "root","1234");
+
+Statement mstmt = mconn.createStatement();
+ResultSet mrs = mstmt.executeQuery("Select * from user where email='"+(String)session.getAttribute("ID")+"'");
+mrs.next();
+
+Statement mstmt2 = mconn.createStatement();
+Statement mstmt3 = mconn.createStatement();
+
+if(mrs.getInt("gcode") != 0){
+	int mgcode = mrs.getInt("gcode");
+	mstmt2.executeQuery("Select count(*) from board where gidx="+mgcode);
+	mstmt3.executeQuery("Select * from board where gidx="+mgcode);
+}
+%>
 
 <html>
 <head>
@@ -89,32 +109,40 @@
                     <ul class="nav" id="side-menu">
                         <li>
                             <a href="/Cider/pages/index.jsp"><i class="fa fa-home fa-fw"></i> 메인으로</a>
-                        </li>                    
+                        </li>
                         <li>
-                            <a href="#"><i class="fa fa-group fa-fw"></i> 팀 메뉴<span class="fa arrow"></span></a>
+                        	<a href="/Cider/pages/team/tindex.jsp"><i class="fa fa-group"></i> 팀 메인</a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="glyphicon glyphicon-menu-hamburger"></span> 팀 메뉴<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                             <%
                             if( (session.getAttribute("GCODE") != null && (Integer)session.getAttribute("GCODE") != 0) && (session.getAttribute("GPWR") != null) && (Integer)session.getAttribute("GPWR") != 0 ){
                         		if( (Integer)session.getAttribute("GPWR") != 0 ){
                         		%>
+
+                        		
                         		<li>
-                        			<a href="#"> 팀 관리</a>
-                        		</li>
-                        		<li>
-                        			<a href="#"> 맴버 관리<span class="fa arrow"></span></a>
+                        			<a href="#"><i class="fa fa-gear"></i> 관리<span class="fa arrow"></span></a>
                         			<ul class="nav nav-third-level">
                         			<li>
-                        				<a href="/Cider/pages/team/apliclist.jsp"> 가입 신청 목록</a>
+                        				<a href="#"> 맴버 관리<span class="fa arrow"></span></a>
+                        				<ul class="nav nav-fourth-level">
+                        				<li>
+                        					<a href="/Cider/pages/team/apliclist.jsp"> 가입 신청 목록</a>
+                        				</li>
+                        				<li>
+                        					<a href="/Cider/pages/team/memberlist.jsp"> 회뭔 록록</a>
+                        				</li>
+                        				</ul>    				
                         			</li>
                         			<li>
-                        				<a href="/Cider/pages/team/memberlist.jsp"> 회뭔 록록</a>
+                        				<a href="#"> 게시판 관리</a>
                         			</li>
                         			</ul>
-                        		</li>
                         		<li>
                         			<a href="/Cider/pages/team/quitT.jsp"> 팀 탈퇴</a>
                         		</li>
-                       `	</ul>
                         		<%
                         		}else{
                         			%>
