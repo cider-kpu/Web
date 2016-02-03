@@ -17,7 +17,7 @@ mrs.next();
 Statement mstmt2 = mconn.createStatement();
 Statement mstmt3 = mconn.createStatement();
 
-if(mrs.getInt("gcode") != 0){
+if(session.getAttribute("GCODE") != null){
 	int mgcode = mrs.getInt("gcode");
 	mstmt2.executeQuery("Select count(*) from board where gidx="+mgcode);
 	mstmt3.executeQuery("Select * from board where gidx="+mgcode);
@@ -137,7 +137,7 @@ if(mrs.getInt("gcode") != 0){
                         				</ul>    				
                         			</li>
                         			<li>
-                        				<a href="#"> 게시판 관리</a>
+                        				<a href="/Cider/pages/team/mboard.jsp"> 게시판 관리</a>
                         			</li>
                         			</ul>
                         		<li>

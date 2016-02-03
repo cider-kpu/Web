@@ -116,11 +116,11 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">가입 신청 목록</h1>
+                        <h1 class="page-header">게시판 목록</h1>
                        	<table class="table table-hover">
                         	<thead>
                                 <tr>
-                                   	<th >Subject</th>
+                                   	<th ></th>
                                    	<th ></th>
                                    	<th ></th>
                                 </tr>
@@ -159,14 +159,16 @@
                         
                         if(tblock != 1 && cblock != 1){
                         	%>
-                        	 <a href="/Cider/pages/team/apliclist.jsp?pidx=<%=cpage - (cpage % 5)%>&gcode=<%=id %>"> [&lt;&lt;] </a>
+                        	 <a href="/Cider/pages/team/mboard.jsp?pidx=<%=cpage - (cpage % 5)%>"> [&lt;&lt;] </a>
                         	<%
                         }
-                        	
+                        
                         
                         int bpage = (cblock == tblock) ? tpage - ((cblock-1) * 5): 5;
                         int tmp = (cblock - 1) * 5 + 1;
-                        
+                      	%>
+                      	<form active="#"><div align=right><input type="text" placeholder="New-name" name="bname"> <button type="submit" class="btn btn-default">추가</button></div></form>
+                      	<%
                         for(int a=0; a < bpage; a++){
                         	if (tmp+a == cpage){
                        			%>
@@ -175,22 +177,22 @@
                         	}
                         	else{
                                 %>
-                                <a href="/Cider/pages/team/apliclist.jsp?pidx=<%=tmp+a %>&gcode=<%=id %>">[<%=tmp+a %>]</a>
+                                <a href="/Cider/pages/team/mboard.jsp?pidx=<%=tmp+a %>">[<%=tmp+a %>]</a>
                               	<%
                         	}
                         }
-                      	
+
                         if(tblock != 1 && cblock != tblock && cpage % 5 == 0){
                         	%>
-                        		<a href="/Cider/pages/team/apliclist.jsp?pidx=<%=cpage + 1%>&gcode=<%=id %>"> [&gt;&gt;] </a>
+                        		<a href="/Cider/pages/team/mboard.jsp?pidx=<%=cpage + 1%>"> [&gt;&gt;] </a>
                         	<%
                         }else if(tblock != 1 && cblock != tblock){
                         	%>
-                      	 		<a href="/Cider/pages/team/apliclist.jsp?pidx=<%=cpage + (6 - (cpage % 5))%>&gcode=<%=id %>"> [&gt;&gt;] </a>
+                      	 		<a href="/Cider/pages/team/mboard.jsp?pidx=<%=cpage + (6 - (cpage % 5))%>"> [&gt;&gt;] </a>
                       	 	<%
                         }
                       	%>
-                
+                		
                       	</div>
                     </div>
                     <!-- /.col-lg-12 -->

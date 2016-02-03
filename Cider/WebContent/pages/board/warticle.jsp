@@ -123,7 +123,7 @@ $(function(){
 								</tr>
 								<tr>
 									<td colspan="2">
-										<input type="button" class="btn btn-default" id="save" value="저장"/>
+										<input type="button" class="btn btn-default" id="save" value="완료"/>
 										<a href="/Cider/pages/board/vboard.jsp?bcode=<%=bcode %>"><button type="button" class="btn btn-default">취소</button></a>
 									</td>
 								</tr>
