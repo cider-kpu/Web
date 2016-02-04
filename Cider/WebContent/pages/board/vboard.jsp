@@ -8,6 +8,11 @@
 	request.setCharacterEncoding("utf-8");
 
 	int id = Integer.parseInt(request.getParameter("bcode"));	
+	int type=0;
+	
+	if(request.getParameter("type") != null){
+		type = Integer.parseInt(request.getParameter("type"));
+	}
 	
 	Statement stmt;
 	Statement stmt2;
@@ -137,6 +142,9 @@
 </head>
 
 <body>
+<%
+if(type == 0){
+%>
 <%@include file="..\menu.jsp" %>
 
         <!-- Page Content -->
@@ -150,8 +158,8 @@
                                 <tr>
                                     <th width=50>#</th>
                                    	<th >Subject</th>
-                                    <th align="center" width=80>User</th>
-                                    <th>date</th>
+                                    <th width=120>User</th>
+                                    <th width=100>date</th>
                                 </tr>
                             </thead>
                             
@@ -160,7 +168,14 @@
                             	int b = (cpage == tpage) ? rs3.getInt("count(*)")-sta_idx : 10;
                             	
                             	for(int a=0 ; a < b; a++){
-                            		if(rs3.getInt("count(*)") == 0 || rs.isLast() == true || rs == null) break;
+                            		if(rs3.getInt("count(*)") == 0 || rs.isLast() == true || rs == null) {
+                            			%>
+                            			<tr>
+                            				<td colspan=3>게시글이 없습니다.</td>
+                            			</tr>
+                            			<%
+                            			break;
+                            		}
                             		else{
                             		
                             		rs.next();
@@ -169,8 +184,8 @@
                             			<tr>
                             				<td><%=rs.getInt("idx") %></td>
                             				<td><a href="./varticle.jsp?idx=<%=rs.getInt("idx") %>&bcode=<%=id %>"><%=rs.getString("subject") %></a></td>
-                            				<td><%=rs.getString("writer") %></td>
-                            				<td><%=rs.getString("date") %></td>
+                            				<td align="center"><%=rs.getString("writer") %></td>
+                            				<td align="center"><%=rs.getString("date") %></td>
                             			</tr>
                             		<%
                             		}
@@ -196,6 +211,10 @@
                         	}
                         }
                         	
+                      	
+                        if(rs3.getInt("count(*)") == 0){
+                        	
+                        }else{
                         
                         int bpage = (cblock == tblock) ? tpage - ((cblock-1) * 5): 5;
                         int tmp = (cblock - 1) * 5 + 1;
@@ -219,8 +238,8 @@
                         		}
                         	}
                         }
-                      	
-                        if(tblock != 1 && cblock != tblock && cpage % 5 == 0){
+                        
+						if(tblock != 1 && cblock != tblock && cpage % 5 == 0){
                         	if(search == null || search.equals("") == true){
                         	%>
                         		<a href="./vboard.jsp?pidx=<%=cpage + 1%>&bcode=<%=id %>"> [&gt;&gt;] </a>
@@ -241,6 +260,7 @@
                       	 		<%
                         	}
                         }
+                        }
                       	%>
                 
                       	</div>
@@ -249,13 +269,13 @@
                       		if(search == null || search.equals("") == true){
                       			%>
                       		<form action="/Cider/pages/board/vboard.jsp?bcode=<%=id%>" method="post">
-                      			<input type="text" name="search" id="search"> <input type="submit" value="검색">
+                      			<input type="text" name="search" id="search"> <input type="submit" value="검색" class="btn btn-outline btn-primary btn-sm">
                      	 	</form>
                       			<%
                       		}else{
                       			%>
                       		<form action="/Cider/pages/board/vboard.jsp?bcode=<%=id%>" method="post">
-                      			<input type="text" name="search" id="search" value="<%=search%>"> <input type="submit" value="검색">
+                      			<input type="text" name="search" id="search" value="<%=search%>"> <input type="submit" value="검색" class="btn btn-outline btn-primary btn-sm">
                      	 	</form>
                       			<%
                       		}
@@ -271,6 +291,159 @@
             <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
+<%
+}else{
+	%>
+<%@include file="/pages/team/tmenu.jsp" %>
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header"><%=name %></h1>
+                       	<table class="table table-hover">
+                        	<thead>
+                                <tr>
+                                    <th width=50>#</th>
+                                   	<th >Subject</th>
+                                    <th width=120>User</th>
+                                    <th width=100>date</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                            <% 
+                            	int b = (cpage == tpage) ? rs3.getInt("count(*)")-sta_idx : 10;
+                            	
+                            	for(int a=0 ; a < b; a++){
+                            		if(rs3.getInt("count(*)") == 0 || rs.isLast() == true || rs == null) {
+                            			%>
+                            			<tr>
+                            				<td colspan=3>게시글이 없습니다.</td>
+                            			</tr>
+                            			<%
+                            			break;}
+                            		else{
+                            		
+                            		rs.next();
+                            		
+                            		%>
+                            			<tr>
+                            				<td><%=rs.getInt("idx") %></td>
+                            				<td><a href="./varticle.jsp?idx=<%=rs.getInt("idx") %>&bcode=<%=id %>&type=1"><%=rs.getString("subject") %></a></td>
+                            				<td align="center"><%=rs.getString("writer") %></td>
+                            				<td align="center"><%=rs.getString("date") %></td>
+                            			</tr>
+                            		<%
+                            		}
+                            	}
+                            %>
+                            </tbody>
+                        </table>
+                        
+                        <div align=center>
+                        
+                        <%
+                        
+                        if(tblock != 1 && cblock != 1){
+                        	
+                        	if(search == null || search.equals("") == true){
+                        	%>
+                        	 <a href="./vboard.jsp?pidx=<%=cpage - (cpage % 5)%>&bcode=<%=id %>&type=1"> [&lt;&lt;] </a>
+                        	<%
+                        	}else{
+                            	%>
+                          		 <a href="./vboard.jsp?search=<%=search %>&pidx=<%=cpage - (cpage % 5)%>&bcode=<%=id %>&type=1"> [&lt;&lt;] </a>
+                          		<%
+                        	}
+                        }
+                        	
+                        if(rs3.getInt("count(*)") == 0){
+                        	
+                        }else{
+                        	
+                        int bpage = (cblock == tblock) ? tpage - ((cblock-1) * 5): 5;
+                        int tmp = (cblock - 1) * 5 + 1;
+                        
+                        for(int a=0; a < bpage; a++){
+                        	if (tmp+a == cpage){
+                       			%>
+                        		<b>[<%=tmp+a %>]</b>
+                      			<%
+                        	}
+                        	else{
+                        		
+                        		if(search == null || search.equals("") == true){
+                                %>
+                                <a href="./vboard.jsp?pidx=<%=tmp+a %>&bcode=<%=id %>&type=1">[<%=tmp+a %>]</a>
+                              	<%
+                        		}else{
+                                    %>
+                                    <a href="./vboard.jsp?search=<%=search %>&pidx=<%=tmp+a %>&bcode=<%=id %>&type=1">[<%=tmp+a %>]</a>
+                                  	<%
+                        		}
+                        	}
+                        }
+                        }
+                        
+                        if(rs3.getInt("count(*)") == 0){
+                        	
+                        }else if(tblock != 1 && cblock != tblock && cpage % 5 == 0){
+                        	if(search == null || search.equals("") == true){
+                        	%>
+                        		<a href="./vboard.jsp?pidx=<%=cpage + 1%>&bcode=<%=id %>&type=1"> [&gt;&gt;] </a>
+                        	<%
+                        	}else{
+                            	%>
+                        			<a href="./vboard.jsp?search=<%=search %>&pidx=<%=cpage + 1%>&bcode=<%=id %>&type=1"> [&gt;&gt;] </a>
+                        		<%
+                        	}
+                        }else if(tblock != 1 && cblock != tblock){
+                        	if(search == null || search.equals("") == true){
+                        	%>
+                      	 		<a href="./vboard.jsp?pidx=<%=cpage + (6 - (cpage % 5))%>&bcode=<%=id %>&type=1"> [&gt;&gt;] </a>
+                      	 	<%
+                        	}else{
+                            	%>
+                      	 			<a href="./vboard.jsp?search=<%=search %>&pidx=<%=cpage + (6 - (cpage % 5))%>&bcode=<%=id %>&type=1"> [&gt;&gt;] </a>
+                      	 		<%
+                        	}
+                        }
+                      	%>
+                
+                      	</div>
+                      	<div align="center">
+                      	<%
+                      		if(search == null || search.equals("") == true){
+                      			%>
+                      		<form action="/Cider/pages/board/vboard.jsp?bcode=<%=id%>&type=1" method="post">
+                      			<input type="text" name="search" id="search"> <input type="submit" value="검색" class="btn btn-outline btn-primary btn-sm">
+                     	 	</form>
+                      			<%
+                      		}else{
+                      			%>
+                      		<form action="/Cider/pages/board/vboard.jsp?bcode=<%=id%>&type=1" method="post">
+                      			<input type="text" name="search" id="search" value="<%=search%>"> <input type="submit" value="검색" class="btn btn-outline btn-primary btn-sm">
+                     	 	</form>
+                      			<%
+                      		}
+                      	%>
+						</div>
+                      	
+                      	<div align=right><a class="btn btn-default" href="./warticle.jsp?bcode=<%=id %>&type=1">글쓰기</a></div>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+	<%
+}
+%>
+
 
     </div>
     <!-- /#wrapper -->

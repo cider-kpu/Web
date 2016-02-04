@@ -11,6 +11,13 @@
     
     String title = request.getParameter("title");
     String content = request.getParameter("content");
+    
+    // 게시판 구분
+    int type = 0;
+    if(request.getParameter("type") != null){
+    	type = Integer.parseInt(request.getParameter("type"));
+    }
+    
     if( (title != null && !title.equals("")) && (content != null && !content.equals("")) ){
     
   		String email = (String)session.getAttribute("ID");
@@ -37,7 +44,11 @@
 	
 		stmt.executeUpdate("insert into article(idx, subject, writer, contents, date, board) values("+(rs2.getInt("max(idx)")+1)+", '"+title+"', '"+(String)session.getAttribute("ID")+"', '"+content+"', '"+date+"', "+bcode+" )");
 
-		response.sendRedirect("/Cider/pages/board/vboard.jsp?bcode="+bcode);
+		if(type == 0){
+			response.sendRedirect("/Cider/pages/board/vboard.jsp?bcode="+bcode);
+		}else if(type == 1){
+			response.sendRedirect("/Cider/pages/board/vboard.jsp?bcode="+bcode+"&type="+type);
+		}
 		
 		conn.close();
 		stmt.close();

@@ -7,6 +7,11 @@
 <%
 	int idx = Integer.parseInt(request.getParameter("idx"));
 	int bcode = Integer.parseInt(request.getParameter("bcode"));	
+	int type=0;
+	
+	if(request.getParameter("type") != null){
+		type = Integer.parseInt(request.getParameter("type"));
+	}
 	
 	Statement stmt;
 	
@@ -58,8 +63,17 @@
 
 </head>
 <body>
+	<%
+	if(type == 0){
+	%>
 	<%@include file="..\menu.jsp" %>
-	
+	<%
+	}else{
+	%>
+	<%@include file="/pages/team/tmenu.jsp" %>
+	<%
+	}
+	%>
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
@@ -78,9 +92,15 @@
                     </div>
                     <%
                     if(id.equals(rs.getString("writer"))){
-                    	%>
-                    	<div align=right><a href="/Cider/pages/board/amodify.jsp?bcode=<%=bcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">수정</button></a> <a href="/Cider/operation/adelete.jsp?bcode=<%=bcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">삭제</button></a> <a href="/Cider/pages/board/vboard.jsp?bcode=<%=bcode %>"><button type="button" class="btn btn-default">목록</button></a></div>
-                    	<%
+                    	if(type == 0){
+                    		%>
+                    		<div align=right><a href="/Cider/pages/board/amodify.jsp?bcode=<%=bcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">수정</button></a> <a href="/Cider/operation/adelete.jsp?bcode=<%=bcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">삭제</button></a> <a href="/Cider/pages/board/vboard.jsp?bcode=<%=bcode %>"><button type="button" class="btn btn-default">목록</button></a></div>
+                    		<%
+                    	}else if(type == 1){
+                    		%>
+                    		<div align=right><a href="/Cider/pages/board/amodify.jsp?bcode=<%=bcode %>&idx=<%=idx %>&type=<%=type %>"><button type="button" class="btn btn-default">수정</button></a> <a href="/Cider/operation/adelete.jsp?bcode=<%=bcode %>&idx=<%=idx %>&type=<%=type %>"><button type="button" class="btn btn-default">삭제</button></a> <a href="/Cider/pages/board/vboard.jsp?bcode=<%=bcode %>&type=<%=type %>"><button type="button" class="btn btn-default">목록</button></a></div>
+                    		<%
+                    	}
                     }else{
                     	%>
                     	<div align=right><a href="/Cider/pages/board/vboard.jsp?bcode=<%=bcode %>"><button type="button" class="btn btn-default">목록</button></a>

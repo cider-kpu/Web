@@ -16,11 +16,17 @@ mrs.next();
 
 Statement mstmt2 = mconn.createStatement();
 Statement mstmt3 = mconn.createStatement();
+ResultSet mrs2 = null;
+ResultSet mrs3 = null;
+// 아이디 세션값 초기화
+session.setAttribute("GCODE", mrs.getInt("gcode"));
+session.setAttribute("GPWR", mrs.getInt("gpwr"));
 
 if(session.getAttribute("GCODE") != null){
 	int mgcode = mrs.getInt("gcode");
-	mstmt2.executeQuery("Select count(*) from board where gidx="+mgcode);
-	mstmt3.executeQuery("Select * from board where gidx="+mgcode);
+	mrs2 = mstmt2.executeQuery("Select count(*) from board where gidx="+mgcode);
+	mrs3 = mstmt3.executeQuery("Select * from board where gidx="+mgcode);
+	mrs2.next();
 }
 %>
 
@@ -111,13 +117,38 @@ if(session.getAttribute("GCODE") != null){
                             <a href="/Cider/pages/index.jsp"><i class="fa fa-home fa-fw"></i> 메인으로</a>
                         </li>
                         <li>
-                        	<a href="/Cider/pages/team/tindex.jsp"><i class="fa fa-group"></i> 팀 메인</a>
+                        	<a href="/Cider/pages/team/tindex.jsp"><i class="fa fa-group fa-fw"></i> 팀 메인</a>
+                        </li>
+                        <%
+                        	if( (session.getAttribute("GCODE") != null && (Integer)session.getAttribute("GCODE") != 0) ){
+                        		%>
+                        <li>
+                        	<a href="#" ><i class="fa fa-edit fa-fw" ></i> 게시판<span class="fa arrow"></span></a>
+                        	<ul class="nav nav-second-level">
+                        		<%
+                        		if( mrs2.getInt("count(*)") == 0){
+
+                        		}else{
+                        			for(;;){
+                        				if( !mrs3.isLast() ){
+                        					mrs3.next();
+                        				%>
+                        	<li>
+                        		<a href="/Cider/pages/board/vboard.jsp?bcode=<%=mrs3.getInt("idx") %>&type=1"><%=mrs3.getString("name") %></a>
+                        	</li>
+                        				<%
+                        				}else break;
+                        			}
+                        		}
+                        	}
+                        %>
+                        	</ul>
                         </li>
                         <li>
-                            <a href="#"><span class="glyphicon glyphicon-menu-hamburger"></span> 팀 메뉴<span class="fa arrow"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-menu-hamburger fa-fw"></span> 팀 메뉴<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                             <%
-                            if( (session.getAttribute("GCODE") != null && (Integer)session.getAttribute("GCODE") != 0) && (session.getAttribute("GPWR") != null) && (Integer)session.getAttribute("GPWR") != 0 ){
+                            if( (session.getAttribute("GCODE") != null && (Integer)session.getAttribute("GCODE") != 0) ){
                         		if( (Integer)session.getAttribute("GPWR") != 0 ){
                         		%>
 
@@ -147,19 +178,12 @@ if(session.getAttribute("GCODE") != null){
                         		}else{
                         			%>
                         			<li>
-                        				<a href="#"> 팀 탈퇴</a>
+                        				<a href="/Cider/pages/team/quitT.jsp"> 팀 탈퇴</a>
                         			</li>
                         	</ul>
                         			<%
                         		}
-                        	}else if( session.getAttribute("ID") == null){
-                            		%>
-                            	<li>
-                            		<a href="/Cider/pages/login.html">로그인</a>
-                            	</li>
-                            </ul>
-                            		<%
-                            	}else{
+                            }else{
                             		%>
                             	<li>
                             		<a href="/Cider/pages/team/teamlist.jsp"> 팀 가입하기</a>
@@ -169,7 +193,7 @@ if(session.getAttribute("GCODE") != null){
                             	</li>
                             </ul>
                             		<%
-                            	}
+                            }
                             %>
                         </li>
                     </ul>

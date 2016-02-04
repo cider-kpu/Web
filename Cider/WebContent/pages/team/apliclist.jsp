@@ -163,31 +163,35 @@
                         	<%
                         }
                         	
-                        
-                        int bpage = (cblock == tblock) ? tpage - ((cblock-1) * 5): 5;
-                        int tmp = (cblock - 1) * 5 + 1;
-                        
-                        for(int a=0; a < bpage; a++){
-                        	if (tmp+a == cpage){
-                       			%>
-                        		<b>[<%=tmp+a %>]</b>
-                      			<%
-                        	}
-                        	else{
-                                %>
-                                <a href="/Cider/pages/team/apliclist.jsp?pidx=<%=tmp+a %>&gcode=<%=id %>">[<%=tmp+a %>]</a>
-                              	<%
-                        	}
+                        if(rs3.getInt("count(*)") == 0){
+                        	
                         }
+                        else{
+                        	int bpage = (cblock == tblock) ? tpage - ((cblock-1) * 5): 5;
+                        	int tmp = (cblock - 1) * 5 + 1;
+                        
+                        	for(int a=0; a < bpage; a++){
+                        		if (tmp+a == cpage){
+                       			%>
+                        			<b>[<%=tmp+a %>]</b>
+                      			<%
+                        		}
+                        		else{
+                                %>
+                            	    <a href="/Cider/pages/team/apliclist.jsp?pidx=<%=tmp+a %>&gcode=<%=id %>">[<%=tmp+a %>]</a>
+                              	<%
+                        		}
+                        	}
                       	
-                        if(tblock != 1 && cblock != tblock && cpage % 5 == 0){
+                        	if(tblock != 1 && cblock != tblock && cpage % 5 == 0){
                         	%>
                         		<a href="/Cider/pages/team/apliclist.jsp?pidx=<%=cpage + 1%>&gcode=<%=id %>"> [&gt;&gt;] </a>
                         	<%
-                        }else if(tblock != 1 && cblock != tblock){
+                       		}else if(tblock != 1 && cblock != tblock){
                         	%>
                       	 		<a href="/Cider/pages/team/apliclist.jsp?pidx=<%=cpage + (6 - (cpage % 5))%>&gcode=<%=id %>"> [&gt;&gt;] </a>
                       	 	<%
+                        	}
                         }
                       	%>
                 

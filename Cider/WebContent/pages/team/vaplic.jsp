@@ -104,7 +104,7 @@
                     <%
                     if(id.equals(rs.getString("writer"))){
                     	%>
-                    	<div align=right><a href="/Cider/pages/team/aplicmodify.jsp?gcode=<%=gcode %>&idx=<%=idx %>&type=1"><button type="button" class="btn btn-default">수정</button></a> <a href="/Cider/operation/adelete.jsp?gcode=<%=gcode %>&idx=<%=idx %>&type=1"><button type="button" class="btn btn-default">삭제</button></a> </div>
+                    	<div align=right><a href="/Cider/pages/team/aplicmodify.jsp?gcode=<%=gcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">수정</button></a> <a href="/Cider/operation/aplicdelete.jsp?gcode=<%=gcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">삭제</button></a> </div>
                     	<%
                     }else if((Integer)session.getAttribute("GCODE") == gcode && (Integer)session.getAttribute("GPWR") != 0){
                     	%>

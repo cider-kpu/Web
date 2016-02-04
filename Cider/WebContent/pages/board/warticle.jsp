@@ -6,6 +6,7 @@
 <html>
 <%
 	String id = (String)session.getAttribute("ID");
+	int type=0;
 	
 	if(id == null){
 		%>
@@ -14,7 +15,9 @@
 		</script>
 		<%
 	}
-	
+	if(request.getParameter("type") != null){
+		type = Integer.parseInt(request.getParameter("type"));
+	}
 	int bcode = Integer.parseInt(request.getParameter("bcode"));
 	
 	Statement stmt;
@@ -101,15 +104,34 @@ $(function(){
 </head>
 
 <body>
-<%@include file="..\menu.jsp" %>
-
+<%
+if(type == 0){
+	%>
+	<%@include file="..\menu.jsp" %>
+	<%
+}else if(type == 1){
+	%>
+	<%@include file="/pages/team/tmenu.jsp" %>
+	<%
+}
+%>
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
                     <h1 class="page-header">글 쓰기</h1>
+                    <%
+                    if(type == 0){
+                    %>
 						<form id="frm" action="/Cider/operation/insert.jsp?bcode=<%=bcode %>" method="post" >
+					<%
+                    }else if(type == 1){
+					%>
+						<form id="frm" action="/Cider/operation/insert.jsp?bcode=<%=bcode %>&type=<%=type %>" method="post" >
+					<%
+					} 
+					%>
 							<table width="100%">
 								<tr>
 									<td>제목</td>

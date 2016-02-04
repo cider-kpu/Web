@@ -143,9 +143,9 @@
                             		rs.next();
                             		%>
                             			<tr>
-                            				<td><a href="#"><%=rs.getString("name") %></a></td>
-                            				<td><a href="#">수정하기</a></td>
-                            				<td><a href="#">삭제하기</a></td>
+                            				<td align="center"><a href="#"><%=rs.getString("name") %></a></td>
+                            				<td align="right"><form action="" method="post"><input type="text" placeholder="Rename" name="name"></td>
+                            				<td align="right"><input type="submit" class="btn btn-outline btn-primary btn-xs" value="수정하기"></form> <a href="#" class="btn btn-outline btn-primary btn-xs">삭제하기</a></td>
                             			</tr>
                             		<%
                             	}
@@ -167,7 +167,7 @@
                         int bpage = (cblock == tblock) ? tpage - ((cblock-1) * 5): 5;
                         int tmp = (cblock - 1) * 5 + 1;
                       	%>
-                      	<form active="#"><div align=right><input type="text" placeholder="New-name" name="bname"> <button type="submit" class="btn btn-default">추가</button></div></form>
+                      	<div align=right><form action="/Cider/operation/addboard.jsp" method="post"><input type="text" placeholder="New-name" name="name" id="name"> <input type="submit" class="btn btn-default" value="추가"></form></div>
                       	<%
                         for(int a=0; a < bpage; a++){
                         	if (tmp+a == cpage){

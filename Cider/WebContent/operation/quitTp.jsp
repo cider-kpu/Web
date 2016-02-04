@@ -19,30 +19,33 @@
 
 	Statement stmt = conn.createStatement();
 	
-	
 	int idx = (Integer)session.getAttribute("GCODE");
 		
 	ResultSet rs = stmt.executeQuery("select * from team where idx="+idx);
 	rs.next();
-		
+	
 	if( (rs.getString("leader")).equals(id) ){
-		Statement stmt3 = conn.createStatement();
-		ResultSet rs2 = stmt3.executeQuery("select count(*) from user where gcode="+idx);
+		ResultSet rs2 = stmt.executeQuery("select count(*) from user where gcode="+idx);
 		rs2.next();
 		if (rs2.getInt("count(*)") == 1){
 			Statement stmt2 = conn.createStatement();
+			Statement stmt3 = conn.createStatement();
 			Statement stmt4 = conn.createStatement();
 			
+			ResultSet rs3 = stmt3.executeQuery("select * from board where gidx="+idx);
+			
 			stmt2.executeUpdate("update user set gcode=0, gpwr=0 where gcode="+idx);
-			stmt4.executeUpdate("delete from team where idx="+idx);
+			stmt2.executeUpdate("delete from team where idx="+idx);
+			stmt2.executeUpdate("delete from board where gidx="+idx);
+			stmt2.executeUpdate("delete from article ");
 			
 			session.setAttribute("GCODE", 0);
 			session.setAttribute("GPWR", 0);
 			
 			stmt2.close();
-			stmt4.close();
 			
 			response.sendRedirect("/Cider/pages/index.jsp");
+			
 		}else{
 			%>
 			<script>
@@ -52,15 +55,24 @@
 			<%	
 		}
 		
-		stmt3.close();
 		rs2.close();
+	}else{
+		Statement stmt2 = conn.createStatement();
+		
+		stmt2.executeUpdate("update user set gcode=0, gpwr=0 where gcode="+idx);
+		stmt2.executeUpdate("delete from team where idx="+idx);
+		
+		session.setAttribute("GCODE", 0);
+		session.setAttribute("GPWR", 0);
+		
+		stmt2.close();
+		
+		response.sendRedirect("/Cider/pages/index.jsp");
 	}
 	
 	conn.close();
 	stmt.close();
 	rs.close();
-	
-
 %>
 <html>
 </html>

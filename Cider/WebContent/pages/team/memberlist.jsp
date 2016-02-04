@@ -166,11 +166,11 @@
                             				<%
                             				if(rs.getInt("gpwr") == 0 ){
                             					%>
-                            				<td><a href="/Cider/operation/kick.jsp?id=<%=rs.getString("email") %>"> 추방하기 </a>
+                            				<td><a href="/Cider/operation/kick.jsp?id=<%=rs.getString("email") %>" class="btn btn-outline btn-primary btn-xs"> 추방하기 </a>
                             					<%
                             				}else if((Integer)session.getAttribute("GPWR") == 2 && !((String)session.getAttribute("ID")).equals(rs.getString("email")) ){
                                 				%>
-                                			<td><a href="/Cider/operation/kick.jsp?id=<%=rs.getString("email") %>"> 추방하기 </a>
+                                			<td><a href="/Cider/operation/kick.jsp?id=<%=rs.getString("email") %>" class="btn btn-outline btn-primary btn-xs"> 추방하기 </a>
                                 				<%
                             				}
                             				%>
@@ -252,7 +252,7 @@
                       		if(search == null || search.equals("") == true){
                       			%>
                       		<form action="/Cider/pages/team/memberlist.jsp" method="post">
-                      			<input type="text" name="search" id="search"> <input type="submit" value="검색">
+                      			<input type="text" name="search" id="search"> <input type="submit" value="검색" class="btn btn-outline btn-primary btn-sm">
                      	 	</form>
                       			<%
                       		}else{

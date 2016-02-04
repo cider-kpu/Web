@@ -57,25 +57,10 @@
 								String st = (String)session.getAttribute("ID");
 								if(st == null) out.print("WTF");
 
+								out.print(session.getAttribute("GCODE"));
+								out.print(session.getAttribute("GPWR"));
 							%>
                     </div>
-                        <div align="center">
-                      	<%
-                      		if(search == null || search.equals("") == true){
-                      			%>
-                      		<form action="../pages/blank.jsp" method="post">
-                      			<input type="text" name="search" id="search"> <input type="submit" value="검색">
-                     	 	</form>
-                      			<%
-                      		}else{
-                      			%>
-                      		<form action="../pages/blank.jsp" method="post">
-                      			<input type="text" name="search" id="search" value="<%=search%>"> <input type="submit" value="검색">
-                     	 	</form>
-                      			<%
-                      		}
-                      	%>
-						</div>
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->
