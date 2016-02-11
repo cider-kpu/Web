@@ -169,6 +169,8 @@
                       	%>
                       	<div align=right><form action="/Cider/operation/addboard.jsp" method="post"><input type="text" placeholder="New-name" name="name" id="name"> <input type="submit" class="btn btn-default" value="추가"></form></div>
                       	<%
+                      	if(rs3.getInt("count(*)") != 0){ //page 표시 에러
+                      		
                         for(int a=0; a < bpage; a++){
                         	if (tmp+a == cpage){
                        			%>
@@ -191,6 +193,8 @@
                       	 		<a href="/Cider/pages/team/mboard.jsp?pidx=<%=cpage + (6 - (cpage % 5))%>"> [&gt;&gt;] </a>
                       	 	<%
                         }
+                        
+                      	}
                       	%>
                 		
                       	</div>

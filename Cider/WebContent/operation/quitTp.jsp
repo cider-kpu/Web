@@ -32,12 +32,24 @@
 			Statement stmt3 = conn.createStatement();
 			Statement stmt4 = conn.createStatement();
 			
-			ResultSet rs3 = stmt3.executeQuery("select * from board where gidx="+idx);
+			ResultSet rs3 = stmt3.executeQuery("select count(*) from board where gidx="+idx);
+			rs3.next();
 			
+			if(rs3.getInt("count(*)") != 0 ) {
+				rs3 = stmt3.executeQuery("select * from board where gidx="+idx);
+				for(;;){
+					
+					if( rs3.isLast() ) break;
+					else{
+						rs3.next();
+						stmt2.executeUpdate("delete from article where board="+rs3.getInt("idx"));
+					}
+				}
+				
+				stmt2.executeUpdate("delete from board where gidx="+idx);
+			}
 			stmt2.executeUpdate("update user set gcode=0, gpwr=0 where gcode="+idx);
 			stmt2.executeUpdate("delete from team where idx="+idx);
-			stmt2.executeUpdate("delete from board where gidx="+idx);
-			stmt2.executeUpdate("delete from article ");
 			
 			session.setAttribute("GCODE", 0);
 			session.setAttribute("GPWR", 0);

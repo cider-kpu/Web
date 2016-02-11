@@ -127,7 +127,11 @@ if(session.getAttribute("GCODE") != null){
                         	<ul class="nav nav-second-level">
                         		<%
                         		if( mrs2.getInt("count(*)") == 0){
-
+									%>
+									<li>
+										<a href="#">게시판이 없습니다.</a>
+									</li>
+									<%
                         		}else{
                         			for(;;){
                         				if( !mrs3.isLast() ){
@@ -140,25 +144,25 @@ if(session.getAttribute("GCODE") != null){
                         				}else break;
                         			}
                         		}
+                        		%>
+                        		</ul>
+                        		<%
                         	}
                         %>
-                        	</ul>
+                        	
                         </li>
                         <li>
-                            <a href="#"><span class="glyphicon glyphicon-menu-hamburger fa-fw"></span> 팀 메뉴<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
+
                             <%
                             if( (session.getAttribute("GCODE") != null && (Integer)session.getAttribute("GCODE") != 0) ){
                         		if( (Integer)session.getAttribute("GPWR") != 0 ){
                         		%>
-
-                        		
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> 팀 메뉴<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
                         		<li>
-                        			<a href="#"><i class="fa fa-gear"></i> 관리<span class="fa arrow"></span></a>
+                        			<a href="#"> 맴버 관리<span class="fa arrow"></span></a>
                         			<ul class="nav nav-third-level">
-                        			<li>
-                        				<a href="#"> 맴버 관리<span class="fa arrow"></span></a>
-                        				<ul class="nav nav-fourth-level">
+                        			
                         				<li>
                         					<a href="/Cider/pages/team/apliclist.jsp"> 가입 신청 목록</a>
                         				</li>
@@ -172,19 +176,22 @@ if(session.getAttribute("GCODE") != null){
                         			</li>
                         			</ul>
                         		<li>
-                        			<a href="/Cider/pages/team/quitT.jsp"> 팀 탈퇴</a>
+                        			<a href="/Cider/pages/team/quitT.jsp"><i class="fa fa-sign-out fa-fw"></i> 팀 탈퇴</a>
                         		</li>
                         		<%
                         		}else{
                         			%>
+                        			
                         			<li>
-                        				<a href="/Cider/pages/team/quitT.jsp"> 팀 탈퇴</a>
+                        				<a href="/Cider/pages/team/quitT.jsp"><i class="fa fa-sign-out fa-fw"></i> 팀 탈퇴</a>
                         			</li>
-                        	</ul>
                         			<%
                         		}
-                            }else{
+                            }
+                            else{
                             		%>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> 팀 메뉴<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
                             	<li>
                             		<a href="/Cider/pages/team/teamlist.jsp"> 팀 가입하기</a>
                             	</li>

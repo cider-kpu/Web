@@ -44,7 +44,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header"><img src="../image/bn.png"></h1>
+                        <h1 class="page-header"><img src="../image/logo.png"></h1>
 							<%
 								String st = (String)session.getAttribute("ID");
 								if(st == null) out.print("WTF");
