@@ -157,7 +157,7 @@ if(session.getAttribute("GCODE") != null){
                             if( (session.getAttribute("GCODE") != null && (Integer)session.getAttribute("GCODE") != 0) ){
                         		if( (Integer)session.getAttribute("GPWR") != 0 ){
                         		%>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> 팀 메뉴<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> 팀 관리<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                         		<li>
                         			<a href="#"> 맴버 관리<span class="fa arrow"></span></a>

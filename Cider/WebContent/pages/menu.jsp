@@ -65,14 +65,14 @@
                     <%
                     	if(session.getAttribute("ID") == null){
                     		%>
-                    		<li><a href="./login.html"><i class="fa fa-sign-in fa-fw"></i> Login</a>
+                    		<li><a href="/Cider/pages/login.html"><i class="fa fa-sign-in fa-fw"></i> Login</a>
                     		<%
                     	}else{
                     %>
-                        <li><a href="./profile.jsp"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="/Cider/pages/profile.jsp"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="..\operation\logoutp.jsp"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="/Cider/operation/logoutp.jsp"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     <%
                     }
@@ -120,75 +120,8 @@
                         <%
                         }
                         %>
-                        <li>
-                            <a href="/Cider/pages/forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="/Cider/pages/panels-wells.html">Panels and Wells</a>
-                                </li>
-                                <li>
-                                    <a href="/Cider/pages/buttons.html">Buttons</a>
-                                </li>
-                                <li>
-                                    <a href="/Cider/pages/notifications.html">Notifications</a>
-                                </li>
-                                <li>
-                                    <a href="/Cider/pages/typography.html">Typography</a>
-                                </li>
-                                <li>
-                                    <a href="/Cider/pages/icons.html"> Icons</a>
-                                </li>
-                                <li>
-                                    <a href="/Cider/pages/grid.html">Grid</a>
-                                </li>
-                            </ul>
+
                             <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Third Level <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="/Cider/pages/blank.jsp">Blank Page</a>
-                                </li>
-                                <li>
-                                    <a href="/Cider/pages/blank.jsp">Sample manu</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

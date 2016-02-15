@@ -83,7 +83,7 @@
 
 </head>
 <body>
-	<%@include file="/pages/team/tmenu.jsp" %>
+	<%@include file="./tmenu.jsp" %>
 	
         <!-- Page Content -->
         <div id="page-wrapper">

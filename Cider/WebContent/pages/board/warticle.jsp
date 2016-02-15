@@ -111,7 +111,7 @@ if(type == 0){
 	<%
 }else if(type == 1){
 	%>
-	<%@include file="/pages/team/tmenu.jsp" %>
+	<%@include file="../team/tmenu.jsp" %>
 	<%
 }
 %>

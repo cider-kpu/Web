@@ -70,7 +70,7 @@
 	<%
 	}else{
 	%>
-	<%@include file="/pages/team/tmenu.jsp" %>
+	<%@include file="../team/tmenu.jsp" %>
 	<%
 	}
 	%>

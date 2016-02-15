@@ -294,7 +294,7 @@ if(type == 0){
 <%
 }else{
 	%>
-<%@include file="/pages/team/tmenu.jsp" %>
+<%@include file="../team/tmenu.jsp" %>
 
         <!-- Page Content -->
         <div id="page-wrapper">
