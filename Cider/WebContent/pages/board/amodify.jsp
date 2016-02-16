@@ -8,13 +8,17 @@
     request.setCharacterEncoding("utf-8");
     
 	String id = (String)session.getAttribute("ID");
-
+	int type = 0;
+	
 	if(id == null){
 		%>
 		<script>
 		location.href="/Cider/pages/login.html"
 		</script>
 		<%
+	}
+	if(request.getParameter("type") != null){
+		type = Integer.parseInt(request.getParameter("type"));
 	}
 
 	int idx = Integer.parseInt(request.getParameter("idx"));
@@ -115,15 +119,26 @@ $(function(){
 </head>
 
 <body>
-	<%@include file="..\menu.jsp" %>
-
+<%
+if(type == 0){
+	%>
+		<%@include file="..\menu.jsp" %>
+	<%
+}else{
+	%>
+		<%@include file="..\team\tmenu.jsp" %>
+	<%
+}
+%>
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
                     <h1 class="page-header">글 수정</h1>
-						<form id="frm" action="/Cider/operation/amodifyp.jsp?idx=<%=idx %>&bcode=<%=bcode %>" method="post" >
+                    <%
+                    %>
+						<form id="frm" action="/Cider/operation/article_modify.jsp?idx=<%=idx %>&bcode=<%=bcode %>" method="post" >
 							<table width="100%">
 								<tr>
 									<td>제목</td>

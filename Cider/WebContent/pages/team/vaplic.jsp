@@ -104,11 +104,11 @@
                     <%
                     if(id.equals(rs.getString("writer"))){
                     	%>
-                    	<div align=right><a href="/Cider/pages/team/aplicmodify.jsp?gcode=<%=gcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">수정</button></a> <a href="/Cider/operation/aplicdelete.jsp?gcode=<%=gcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">삭제</button></a> </div>
+                    	<div align=right><a href="/Cider/pages/team/aplicmodify.jsp?gcode=<%=gcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">수정</button></a> <a href="/Cider/operation/aplic_delete.jsp?gcode=<%=gcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">삭제</button></a> </div>
                     	<%
                     }else if((Integer)session.getAttribute("GCODE") == gcode && (Integer)session.getAttribute("GPWR") != 0){
                     	%>
-                    	<div align=right><a href="/Cider/operation/accept.jsp?&idx=<%=idx %>&gcode=<%=gcode %> "><button type="button" class="btn btn-default">승인</button></a> <a href="/Cider/operation/reject.jsp?gcode=<%=gcode%>&idx=<%=idx %> "><button type="button" class="btn btn-default">거부</button></a> <a href="/Cider/pages/team/apliclist.jsp "><button type="button" class="btn btn-default">목록</button></a>
+                    	<div align=right><a href="/Cider/operation/aplic_accept.jsp?&idx=<%=idx %>&gcode=<%=gcode %> "><button type="button" class="btn btn-default">승인</button></a> <a href="/Cider/operation/aplic_reject.jsp?gcode=<%=gcode%>&idx=<%=idx %> "><button type="button" class="btn btn-default">거부</button></a> <a href="/Cider/pages/team/apliclist.jsp "><button type="button" class="btn btn-default">목록</button></a>
                     	<%
                     }
                     %>

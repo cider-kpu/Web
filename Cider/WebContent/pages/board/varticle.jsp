@@ -94,11 +94,11 @@
                     if(id.equals(rs.getString("writer"))){
                     	if(type == 0){
                     		%>
-                    		<div align=right><a href="/Cider/pages/board/amodify.jsp?bcode=<%=bcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">수정</button></a> <a href="/Cider/operation/adelete.jsp?bcode=<%=bcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">삭제</button></a> <a href="/Cider/pages/board/vboard.jsp?bcode=<%=bcode %>"><button type="button" class="btn btn-default">목록</button></a></div>
+                    		<div align=right><a href="/Cider/pages/board/amodify.jsp?bcode=<%=bcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">수정</button></a> <a href="/Cider/operation/article_delete.jsp?bcode=<%=bcode %>&idx=<%=idx %>"><button type="button" class="btn btn-default">삭제</button></a> <a href="/Cider/pages/board/vboard.jsp?bcode=<%=bcode %>"><button type="button" class="btn btn-default">목록</button></a></div>
                     		<%
                     	}else if(type == 1){
                     		%>
-                    		<div align=right><a href="/Cider/pages/board/amodify.jsp?bcode=<%=bcode %>&idx=<%=idx %>&type=<%=type %>"><button type="button" class="btn btn-default">수정</button></a> <a href="/Cider/operation/adelete.jsp?bcode=<%=bcode %>&idx=<%=idx %>&type=<%=type %>"><button type="button" class="btn btn-default">삭제</button></a> <a href="/Cider/pages/board/vboard.jsp?bcode=<%=bcode %>&type=<%=type %>"><button type="button" class="btn btn-default">목록</button></a></div>
+                    		<div align=right><a href="/Cider/pages/board/amodify.jsp?bcode=<%=bcode %>&idx=<%=idx %>&type=<%=type %>"><button type="button" class="btn btn-default">수정</button></a> <a href="/Cider/operation/article_delete.jsp?bcode=<%=bcode %>&idx=<%=idx %>&type=<%=type %>"><button type="button" class="btn btn-default">삭제</button></a> <a href="/Cider/pages/board/vboard.jsp?bcode=<%=bcode %>&type=<%=type %>"><button type="button" class="btn btn-default">목록</button></a></div>
                     		<%
                     	}
                     }else{

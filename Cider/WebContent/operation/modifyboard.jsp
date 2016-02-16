@@ -3,7 +3,7 @@
 	import="java.sql.*"
 %>
 <%
-
+request.setCharacterEncoding("utf-8");
 if(session.getAttribute("GPWR") == null || (Integer)session.getAttribute("GPWR") == 0){
 	response.sendRedirect("/Cider/pages/index.jsp");
 }

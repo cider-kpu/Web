@@ -123,7 +123,7 @@ if(session.getAttribute("GCODE") != null){
                         	if( (session.getAttribute("GCODE") != null && (Integer)session.getAttribute("GCODE") != 0) ){
                         		%>
                         <li>
-                        	<a href="#" ><i class="fa fa-edit fa-fw" ></i> 게시판<span class="fa arrow"></span></a>
+                        	<a href="#" ><i class="fa fa-edit fa-fw" ></i> 팀 게시판<span class="fa arrow"></span></a>
                         	<ul class="nav nav-second-level">
                         		<%
                         		if( mrs2.getInt("count(*)") == 0){

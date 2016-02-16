@@ -126,7 +126,7 @@ $(function(){
                 <div class="row">
                     <div class="col-lg-12">
                     <h1 class="page-header">글 수정</h1>
-						<form id="frm" action="/Cider/operation/amodifyp.jsp?idx=<%=idx %>&gcode=<%=gcode %>&type=1" method="post" >
+						<form id="frm" action="/Cider/operation/aplic_modify.jsp?idx=<%=idx %>&gcode=<%=gcode %>&type=1" method="post" >
 							<table width="100%">
 								<tr>
 									<td>제목</td>

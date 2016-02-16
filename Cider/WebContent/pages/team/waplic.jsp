@@ -126,7 +126,7 @@ $(function(){
                 <div class="row">
                     <div class="col-lg-12">
                     <h1 class="page-header">가입 신청</h1>
-						<form id="frm" action="/Cider/operation/aplicinsert.jsp?gcode=<%=gcode %>" method="post" >
+						<form id="frm" action="/Cider/operation/aplic_insert.jsp?gcode=<%=gcode %>" method="post" >
 							<table width="100%">
 								<tr>
 									<td>제목</td>

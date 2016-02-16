@@ -124,11 +124,11 @@ if(type == 0){
                     <%
                     if(type == 0){
                     %>
-						<form id="frm" action="/Cider/operation/insert.jsp?bcode=<%=bcode %>" method="post" >
+						<form id="frm" action="/Cider/operation/article_insert.jsp?bcode=<%=bcode %>" method="post" >
 					<%
                     }else if(type == 1){
 					%>
-						<form id="frm" action="/Cider/operation/insert.jsp?bcode=<%=bcode %>&type=<%=type %>" method="post" >
+						<form id="frm" action="/Cider/operation/article_insert.jsp?bcode=<%=bcode %>&type=<%=type %>" method="post" >
 					<%
 					} 
 					%>
