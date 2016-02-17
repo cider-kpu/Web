@@ -35,6 +35,12 @@
 		session.setAttribute("GPWR", 2);
 		
 		response.sendRedirect("/Cider/pages/index.jsp");
+		
+		conn.close();
+		stmt.close();
+		stmt2.close();
+		stmt3.close();
+		rs.close();
     }    	
 		%>
 		<script>

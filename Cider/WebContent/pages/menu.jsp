@@ -51,7 +51,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/Cider/pages/index.jsp">산속을 샅샅이</a>
+                <a class="navbar-brand" href="/Cider/pages/index.jsp"><img src="/Cider/image/bn.png"></a>
             </div>
             <!-- /.navbar-header -->
 

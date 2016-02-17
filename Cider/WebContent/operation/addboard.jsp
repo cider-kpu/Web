@@ -20,7 +20,6 @@
 		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cider", "root","1234");
 	
 		Statement stmt = conn.createStatement();
-		Statement stmt2 = conn.createStatement();
 		Statement stmt3 = conn.createStatement();
 		
 		ResultSet rs2 = stmt.executeQuery("Select count(*) from board where gidx="+gcode);
@@ -44,7 +43,6 @@
 		
 		conn.close();
 		stmt.close();
-		stmt2.close();
 		stmt3.close();
 		rs2.close();
     }

@@ -46,6 +46,7 @@
 		
 		response.sendRedirect("/Cider/pages/index.jsp");
 		
+		
 		stmt2.close();
 		rs2.close();
 	}

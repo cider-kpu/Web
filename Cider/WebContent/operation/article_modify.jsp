@@ -49,6 +49,12 @@
 		</script>
 		<%
 	}
+	
+	conn.close();
+	stmt.close();
+	stmt2.close();
+	rs.close();
+	
 %>
 
 <html>

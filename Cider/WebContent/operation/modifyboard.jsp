@@ -25,4 +25,8 @@ Statement stmt = conn.createStatement();
 stmt.executeUpdate("update board set name='"+name+"' where idx="+idx);
 
 response.sendRedirect("/Cider/pages/team/mboard.jsp");
+
+conn.close();
+stmt.close();
+
 %>

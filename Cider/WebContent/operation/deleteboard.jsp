@@ -25,4 +25,7 @@ stmt.executeUpdate("delete from article where board="+idx);
 stmt.executeUpdate("delete from board where idx="+idx);
 
 response.sendRedirect("/Cider/pages/team/mboard.jsp");
+
+conn.close();
+stmt.close();
 %>
