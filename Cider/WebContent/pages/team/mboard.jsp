@@ -143,7 +143,7 @@
                             		rs.next();
                             		%>
                             			<tr>
-                            				<td align="center"><a href="#"><%=rs.getString("name") %></a></td>
+                            				<td align="center"><a href="/Cider/pages/board/vboard.jsp?bcode=<%=rs.getInt("idx") %>&type=1"><%=rs.getString("name") %></a></td>
                             				<td align="right"><form action="/Cider/operation/modifyboard.jsp?idx=<%=rs.getInt("idx") %>" method="post"><input type="text" placeholder="Rename" name="name"></td>
                             				<td align="right"><input type="submit" class="btn btn-outline btn-primary btn-xs" value="수정하기"></form> <a href="/Cider/operation/deleteboard.jsp?idx=<%=rs.getInt("idx") %>" class="btn btn-outline btn-primary btn-xs">삭제하기</a></td>
                             			</tr>
