@@ -1,34 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>
-<%@ page import="java.util.*"%> 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    import="java.sql.*"
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="en">
 <%
-	request.setCharacterEncoding("UTF-8");
-	
-	String id = (String)session.getAttribute("ID");
-	
-	if(id == null){
-		%>
-		<script>
-		location.href="/Cider/pages/login.html"
-		</script>
-		<%
-	}
+	int idx = Integer.parseInt(request.getParameter("idx"));
 
-
-	
 	Statement stmt;
+	ResultSet rs;
 	Connection conn=null;
-	
+
 	Class.forName("com.mysql.jdbc.Driver");
 	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cider", "root","1234");
-
+	
 	stmt = conn.createStatement();
+	
+	rs = stmt.executeQuery("select * from schedule where team = "+(Integer)session.getAttribute("BCODE")+" and idx="+idx);
+	rs.next();
+
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -54,58 +50,37 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/Cider/editor/js/HuskyEZCreator.js"></script>
-
-<!-- 에티터 스크립트 -->
-<script type="text/javascript">
-var oEditors = [];
-$(function(){
-      nhn.husky.EZCreator.createInIFrame({
-          oAppRef: oEditors,
-          elPlaceHolder: "ir1", //textarea에서 지정한 id와 일치해야 합니다. 
-          //SmartEditor2Skin.html 파일이 존재하는 경로
-          sSkinURI: "/Cider/editor/SmartEditor2Skin.html",  
-          htParams : {
-              // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-              bUseToolbar : true,             
-              // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-              bUseVerticalResizer : true,     
-              // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-              bUseModeChanger : false,         
-              fOnBeforeUnload : function(){
-                   
-              }
-          }, 
-          fCreator: "createSEditor2"
-      });
-      
-      //저장버튼 클릭시 form 전송
-      $("#save").click(function(){
-          oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
-          $("#frm").submit();
-      });    
-});
-</script>
 
 </head>
-
 <body>
-
-	<%@include file="./team/tmenu.jsp" %>
-
+	<%@include file="../tmenu.jsp" %>
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                    <h1 class="page-header">일정 추가</h1>
+                    <br>
+                                            <div class="panel panel-default">
+                        <div class="panel-heading">
+                        	<%=rs.getString("subject") %>
+                        </div>
+                        <div class="panel-body">
+							<%=rs.getString("contents") %>
+							<p class="lead" align=right><%=rs.getString("writer") %></p><p align=right><%=rs.getString("date") %></H5></p>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
                     <%
-                    String day = request.getParameter("day");
+                    if( (Integer)session.getAttribute("GPWR") == 1 || (Integer)session.getAttribute("GPWR") == 2 ){
+                    		%>
+                    		<div align=right><a href="/Cider/pages/team/schedule/scheModify.jsp?idx=<%=idx %>"><button type="button" class="btn btn-default">수정</button></a> <a href="/Cider/operation/article_delete.jsp?idx=<%=idx %>"><button type="button" class="btn btn-default">삭제</button></a> <a href="/Cider/pages/team/schedule/scheList.jsp"><button type="button" class="btn btn-default">목록</button></a></div>
+                    		<%
+                    }else{
+                    	%>
+                    	<div align=right><a href="/Cider/pages/team/schedule/scheList.jsp"><button type="button" class="btn btn-default">목록</button></a>
+                    	<%
+                    }
                     %>
-                    
-                    <%=day %>
-                    
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -132,7 +107,8 @@ $(function(){
 
 </body>
 <%
-conn.close();
-stmt.close();
+	conn.close();
+	stmt.close();
+	rs.close();
 %>
 </html>

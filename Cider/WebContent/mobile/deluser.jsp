@@ -5,7 +5,6 @@
 <%
   	// 데이터를 안드로이드에서 받음
 	String id = request.getParameter("id");
-	String pw = request.getParameter("pw");
   
 	// DB 연결
 	Connection conn=null;
@@ -15,9 +14,7 @@
 	
 	Statement stmt = conn.createStatement();
 	
-	ResultSet rs = stmt.executeQuery("Select count(*) from user where email='"+id+"'and pw='"+pw+"'");
-	
-	
+	ResultSet rs = stmt.executeQuery("Select count(*) from user where email='"+id+"'");
 	rs.next();
 	
 	
@@ -33,10 +30,12 @@
 	//
 	
 	
-	// 로그인 확인
+	// ID 확인
 	if(rs.getInt("count(*)") == 0){
-		out.print("False");
+		out.print("None");
 	}else{
+		Statement stmt2 = conn.createStatement();
+		stmt2.executeUpdate("delete from user where email='"+id+"'");
 		out.print("True");
 	}
 	

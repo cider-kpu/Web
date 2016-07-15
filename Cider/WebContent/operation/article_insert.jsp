@@ -7,7 +7,7 @@
 
 <%    
     //제대로 utf-8환경이 아니라 한글 깨짐 그래서 임의로 추가                                                   
-    request.setCharacterEncoding("utf-8");
+    request.setCharacterEncoding("UTF-8");
     
     String title = request.getParameter("title");
     String content = request.getParameter("content");

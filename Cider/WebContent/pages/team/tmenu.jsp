@@ -149,10 +149,11 @@ if(session.getAttribute("GCODE") != null){
                         		<%
                         	}
                         %>
-                        	
                         </li>
                         <li>
-
+                        <a href="/Cider/pages/team/schedule/scheList.jsp"><i class="fa fa-calendar fa-fw"></i> 팀 일정</a>
+                        </li>
+                        <li>
                             <%
                             if( (session.getAttribute("GCODE") != null && (Integer)session.getAttribute("GCODE") != 0) ){
                         		if( (Integer)session.getAttribute("GPWR") != 0 ){

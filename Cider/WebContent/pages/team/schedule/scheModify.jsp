@@ -7,7 +7,6 @@
 	request.setCharacterEncoding("UTF-8");
 	
 	String id = (String)session.getAttribute("ID");
-	int type=0;
 	
 	if(id == null){
 		%>
@@ -16,10 +15,8 @@
 		</script>
 		<%
 	}
-	if(request.getParameter("type") != null){
-		type = Integer.parseInt(request.getParameter("type"));
-	}
-	int bcode = Integer.parseInt(request.getParameter("bcode"));
+
+	int idx = Integer.parseInt(request.getParameter("idx"));
 	
 	Statement stmt;
 	Connection conn=null;
@@ -29,13 +26,11 @@
 
 	stmt = conn.createStatement();
 	
-	ResultSet rs = stmt.executeQuery("select * from user where email='"+id+"'");
-	
+	ResultSet rs = stmt.executeQuery("select * from schedule where idx = "+Integer.parseInt(request.getParameter("idx"))+" and team ="+session.getAttribute("BCODE") );
 	rs.next();
 	
-	String name;
-	String email;
-	String pn;
+	String title = rs.getString("subject");
+	String contents = rs.getString("contents");
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -98,53 +93,47 @@ $(function(){
       });    
 });
 </script>
-
 </head>
-
 <body>
-<%
-if(type == 0){
-	%>
-	<%@include file="..\menu.jsp" %>
-	<%
-}else if(type == 1){
-	%>
-	<%@include file="../team/tmenu.jsp" %>
-	<%
-}
-%>
+	<%@include file="../tmenu.jsp" %>
+
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                    <h1 class="page-header">글 쓰기</h1>
-                    <%
-                    if(type == 0){
-                    %>
-						<form id="frm" action="/Cider/operation/article_insert.jsp?bcode=<%=bcode %>" method="post" >
-					<%
-                    }else if(type == 1){
-					%>
-						<form id="frm" action="/Cider/operation/article_insert.jsp?bcode=<%=bcode %>&type=<%=type %>" method="post" >
-					<%
-					} 
-					%>
+                    <h1 class="page-header">일정 추가</h1>
+                    
+					<form id="frm" action="/Cider/operation/sche_modify.jsp?idx=<%=idx %>" method="post" >
+
 							<table width="100%">
 								<tr>
 									<td>제목</td>
-									<td><input type="text" id="title" name="title" style="width:650px"/></td>
+									<td><input type="text" id="title" name="title" value="<%=title%>" style="width:650px"/></td>
+								</tr>
+								<tr>
+									<td>시간</td>
+									<td><select name="hour">
+									<%for(int a=0;a<24;a++){ %>
+									<option><%=a %></option>
+									<%} %>
+									</select> 시 
+									<select name="min">
+									<%for(int a=0;a<=60;a++){ %>
+									<option><%=a %></option>
+									<%} %>
+									</select> 분
 								</tr>
 								<tr>
 									<td>내용</td>
 									<td>
-									<textarea rows="10" cols="30" id="ir1" name="content" style="width:650px; height:350px; "></textarea>
+									<textarea rows="10" cols="30" id="ir1" name="content" style="width:650px; height:350px; "><%=contents %></textarea>
 									</td>
 								</tr>
 								<tr>
 									<td colspan="2">
 										<input type="button" class="btn btn-default" id="save" value="완료"/>
-										<a href="/Cider/pages/board/vboard.jsp?bcode=<%=bcode %>"><button type="button" class="btn btn-default">취소</button></a>
+										<a href="/Cider/pages/team/schedule/scheView.jsp"><button type="button" class="btn btn-default">취소</button></a>
 									</td>
 								</tr>
 							</table>
@@ -177,6 +166,5 @@ if(type == 0){
 <%
 conn.close();
 stmt.close();
-rs.close();
 %>
 </html>

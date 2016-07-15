@@ -45,11 +45,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header"><img src="../image/logo.png"></h1>
-							<%
-								String st = (String)session.getAttribute("ID");
-								if(st == null) out.print("WTF");
-								else out.print("Hello!");
-							%>
+
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -59,8 +55,7 @@
         </div>
         <!-- /#page-wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
+
 
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
